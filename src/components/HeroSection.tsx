@@ -1,49 +1,26 @@
-import { useEffect, useRef } from "react";
 import heroImage from "@/assets/hero-image.png";
 
 const HeroSection = () => {
-  const imageRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (imageRef.current) {
-        const scrollY = window.scrollY;
-        imageRef.current.style.transform = `translateY(${scrollY * 0.3}px)`;
-      }
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
-    <section id="hero" className="relative min-h-screen overflow-hidden bg-gradient-hero flex items-end justify-center">
-      {/* Parallax image */}
-      <div ref={imageRef} className="absolute inset-0 flex items-end justify-center will-change-transform">
-        <img
-          src={heroImage}
-          alt="הופה מוזיקה - DJ crew"
-          className="w-full max-w-3xl object-contain object-bottom"
-          width={1080}
-          height={1620}
-        />
-      </div>
+    <section id="hero" className="relative h-screen overflow-hidden">
+      <img
+        src={heroImage}
+        alt="הופה מוזיקה - DJ crew"
+        className="absolute inset-0 w-full h-full object-cover"
+        width={1080}
+        height={1620}
+      />
 
       {/* Gradient overlay at bottom */}
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background to-transparent" />
 
-      {/* CTA overlay */}
-      <div className="relative z-10 text-center mb-32 md:mb-40 px-6">
-        <h1 className="font-heading text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-foreground drop-shadow-lg">
-          OPA<span className="text-gradient"> Music</span>
-        </h1>
-        <p className="mt-4 text-lg md:text-xl text-muted-foreground max-w-lg mx-auto font-body">
-          האירוע שלכם. האנרגיה שלנו.
-        </p>
+      {/* CTA button in lower third */}
+      <div className="absolute bottom-[20%] left-0 right-0 z-10 flex justify-center px-6">
         <a
           href="#contact"
-          className="inline-block mt-8 px-8 py-3.5 rounded-full bg-primary text-primary-foreground font-semibold text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300"
+          className="px-10 py-3 bg-white/70 text-black font-medium text-base rounded-[4px] shadow-md hover:bg-white/85 hover:shadow-lg hover:scale-105 transition-all duration-300 backdrop-blur-sm"
         >
-          בואו נדבר
+          צרו קשר
         </a>
       </div>
     </section>
