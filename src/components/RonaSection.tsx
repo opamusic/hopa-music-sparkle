@@ -2,10 +2,10 @@ import { useScrollReveal } from "./useScrollReveal";
 import { Music, Drum, Guitar } from "lucide-react";
 
 const instruments = [
-  { icon: Music, label: "סקסופון" },
-  { icon: Drum, label: "ג'מבה" },
-  { icon: Guitar, label: "גיטרה" },
-];
+{ icon: Music, label: "סקסופון" },
+{ icon: Drum, label: "ג'מבה" },
+{ icon: Guitar, label: "גיטרה" }];
+
 
 const RonaSection = () => {
   const { ref, isVisible } = useScrollReveal();
@@ -20,29 +20,29 @@ const RonaSection = () => {
         </div>
 
         <div className={`grid grid-cols-3 gap-6 md:gap-10 max-w-2xl mx-auto transition-all duration-700 ${isVisible ? "animate-fade-up" : ""}`} style={{ animationDelay: "200ms" }}>
-          {instruments.map(({ icon: Icon, label }, i) => (
-            <div
-              key={label}
-              className="flex flex-col items-center gap-4 group"
-              style={{ animationDelay: `${i * 100}ms` }}
-            >
+          {instruments.map(({ icon: Icon, label }, i) =>
+          <div
+            key={label}
+            className="flex flex-col items-center gap-4 group"
+            style={{ animationDelay: `${i * 100}ms` }}>
+            
               <div className="w-20 h-20 md:w-28 md:h-28 rounded-full bg-secondary flex items-center justify-center group-hover:bg-primary/10 group-hover:scale-110 transition-all duration-300">
                 <Icon className="w-8 h-8 md:w-12 md:h-12 text-primary" />
               </div>
               <span className="font-body text-sm md:text-base text-muted-foreground font-medium">{label}</span>
             </div>
-          ))}
+          )}
         </div>
 
         <div className={`text-center mt-12 transition-all duration-700 ${isVisible ? "animate-fade-up" : ""}`} style={{ animationDelay: "400ms" }}>
           <p className="text-muted-foreground leading-relaxed font-body max-w-xl mx-auto">
-            רונא היא להקת האינהאוס של הופה — הרכב חי שמביא רגש, אנרגיה ושמחה לכל רגע באירוע.
-            מטקס החופה ועד כסא כלה, כשמשלבים די-ג'יי מטורף עם להקה חיה — קורה קסם.
+            ההרכב מבית Opa שנוצר כדי ללוות את הרגעים הכי משמעותיים שלכם. שילוב מדויק של סקסופון, דג'מבה וגיטרה שנבנה בדיוק לפי הטעם והוויב שלכם מליווי אישי ומרגש בכסא הכלה והחופה, ועד מעטפת לייב-און-דיג'יי שמעיפה את הרחבה.
+          
           </p>
         </div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 export default RonaSection;
