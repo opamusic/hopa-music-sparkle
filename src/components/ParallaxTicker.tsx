@@ -17,7 +17,7 @@ const ParallaxTicker = () => {
 
   return (
     <div
-      className="overflow-hidden py-6 md:py-10 backdrop-blur-sm relative bg-[#ff66a8]/0"
+      className="overflow-hidden py-6 md:py-10 backdrop-blur-sm relative opacity-100 text-primary bg-[#ff66a8]/[0.52]"
       style={{
         background:
         "linear-gradient(135deg, hsla(334,100%,70%,0.15) 0%, hsla(334,80%,85%,0.25) 50%, hsla(334,100%,70%,0.1) 100%)"

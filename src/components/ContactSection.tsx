@@ -14,7 +14,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="section-padding bg-background">
+    <section id="contact" className="section-padding bg-primary-foreground">
       <div ref={ref} className={`max-w-5xl mx-auto ${isVisible ? "" : "opacity-0"}`}>
         <div className={`text-center mb-14 transition-all duration-700 ${isVisible ? "animate-fade-up" : ""}`}>
           <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-2">צור קשר</h2>
@@ -25,53 +25,53 @@ const ContactSection = () => {
         <div className={`grid md:grid-cols-5 gap-10 transition-all duration-700 ${isVisible ? "animate-fade-up" : ""}`} style={{ animationDelay: "200ms" }}>
           {/* Form */}
           <div className="md:col-span-3">
-            {submitted ? (
-              <div className="bg-secondary rounded-2xl p-12 text-center">
+            {submitted ?
+            <div className="bg-secondary rounded-2xl p-12 text-center">
                 <div className="text-5xl mb-4">🎉</div>
                 <h3 className="font-heading text-2xl font-bold text-foreground mb-2">תודה!</h3>
                 <p className="text-muted-foreground font-body">קיבלנו את הפרטים שלך, ניצור קשר ממש בקרוב.</p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
+              </div> :
+
+            <form onSubmit={handleSubmit} className="space-y-4">
                 <input
-                  type="text"
-                  placeholder="שם מלא"
-                  required
-                  className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all"
-                />
+                type="text"
+                placeholder="שם מלא"
+                required
+                className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all" />
+              
                 <input
-                  type="tel"
-                  placeholder="טלפון"
-                  required
-                  className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all"
-                />
+                type="tel"
+                placeholder="טלפון"
+                required
+                className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all text-right" />
+              
                 <input
-                  type="email"
-                  placeholder="אימייל"
-                  className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all"
-                />
+                type="email"
+                placeholder="אימייל"
+                className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all" />
+              
                 <select
-                  className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all appearance-none"
-                  defaultValue=""
-                >
+                className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all appearance-none"
+                defaultValue="">
+                
                   <option value="" disabled>מי הדי-ג'יי שמעניין אותך?</option>
-                  {djs.map((dj) => (
-                    <option key={dj} value={dj}>{dj}</option>
-                  ))}
+                  {djs.map((dj) =>
+                <option key={dj} value={dj}>{dj}</option>
+                )}
                 </select>
                 <textarea
-                  placeholder="ספרו לנו על האירוע שלכם..."
-                  rows={4}
-                  className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all resize-none"
-                />
+                placeholder="ספרו לנו על האירוע שלכם..."
+                rows={4}
+                className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all resize-none" />
+              
                 <button
-                  type="submit"
-                  className="w-full py-4 rounded-xl bg-primary text-primary-foreground font-heading font-semibold text-lg hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-lg"
-                >
+                type="submit"
+                className="w-full py-4 rounded-xl bg-primary text-primary-foreground font-heading font-semibold text-lg hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-lg">
+                
                   שליחה
                 </button>
               </form>
-            )}
+            }
           </div>
 
           {/* Contact info */}
@@ -97,8 +97,8 @@ const ContactSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 export default ContactSection;

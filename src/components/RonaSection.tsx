@@ -14,7 +14,7 @@ const RonaSection = () => {
     <section id="rona" className="section-padding bg-background">
       <div ref={ref} className={`max-w-6xl mx-auto ${isVisible ? "" : "opacity-0"}`}>
         <div className={`text-center mb-14 transition-all duration-700 ${isVisible ? "animate-fade-up" : ""}`}>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-2 font-serif">RONA</h2>
+          <h2 className="text-4xl md:text-5xl text-foreground mb-2 font-sans font-light">RONA</h2>
           <p className="text-muted-foreground text-lg font-body">הרכב חופה וכסא כלה מבית OPA</p>
           <div className="w-16 h-1 bg-primary mx-auto rounded-full mt-4" />
         </div>
