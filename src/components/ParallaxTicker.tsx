@@ -29,7 +29,7 @@ const ParallaxTicker = () => {
 
       <div
         ref={stripRef}
-        className="flex items-center gap-12 md:gap-20 whitespace-nowrap will-change-transform"
+        className="gap-12 md:gap-20 whitespace-nowrap will-change-transform flex items-center justify-end"
         style={{ width: "max-content" }}>
         
         {Array.from({ length: 30 }).map((_, i) =>
