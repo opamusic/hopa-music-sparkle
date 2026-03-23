@@ -25,7 +25,7 @@ const ParallaxTicker = () => {
       
       {/* Top & bottom accent lines */}
       <div className="absolute inset-x-0 top-0 h-px bg-[#ff66a8]/0" />
-      <div className="absolute inset-x-0 bottom-0 h-px bg-primary/20" />
+      <div className="absolute inset-x-0 bottom-0 h-px bg-[#ff66a8]/0" />
 
       <div
         ref={stripRef}
