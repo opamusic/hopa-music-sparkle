@@ -37,7 +37,7 @@ const ParallaxTicker = () => {
           key={i}
           src={logoBlack}
           alt="OPA"
-          className="h-7 md:h-10 transition-opacity duration-300 opacity-80 shadow-none" />
+          className="h-7 md:h-10 transition-opacity duration-300 opacity-80 shadow-none object-contain" />
 
         )}
       </div>
