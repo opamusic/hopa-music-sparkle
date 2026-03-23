@@ -16,18 +16,28 @@ const ParallaxTicker = () => {
   }, []);
 
   return (
-    <div className="overflow-hidden py-8 bg-primary/10 backdrop-blur-sm">
+    <div
+      className="overflow-hidden py-6 md:py-10 backdrop-blur-sm relative"
+      style={{
+        background:
+          "linear-gradient(135deg, hsla(334,100%,70%,0.15) 0%, hsla(334,80%,85%,0.25) 50%, hsla(334,100%,70%,0.1) 100%)",
+      }}
+    >
+      {/* Top & bottom accent lines */}
+      <div className="absolute inset-x-0 top-0 h-px bg-primary/20" />
+      <div className="absolute inset-x-0 bottom-0 h-px bg-primary/20" />
+
       <div
         ref={stripRef}
-        className="flex items-center gap-16 whitespace-nowrap will-change-transform"
+        className="flex items-center gap-12 md:gap-20 whitespace-nowrap will-change-transform"
         style={{ width: "max-content" }}
       >
-        {Array.from({ length: 20 }).map((_, i) => (
+        {Array.from({ length: 30 }).map((_, i) => (
           <img
             key={i}
             src={logoBlack}
             alt="OPA"
-            className="h-8 md:h-10 opacity-30"
+            className="h-7 md:h-10 opacity-40 hover:opacity-60 transition-opacity duration-300"
           />
         ))}
       </div>
