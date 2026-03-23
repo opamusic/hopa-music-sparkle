@@ -16,13 +16,13 @@ const AboutSection = () => {
         </h2>
         <div className="w-16 h-1 bg-primary mx-auto rounded-full mb-8" />
         <p className="text-lg md:text-xl leading-relaxed text-muted-foreground font-body">
-          אנחנו Opa Music Group. מזקקים קרוב לעשור של ניסיון בחיבור המדויק שבין מסורת לטירוף של המועדון. בחתונות דתיות ומעורבות, המטרה שלנו היא שכולם ירגישו שייכים – מהחופה ועד הסט האחרון של הלילה.
+          אנחנו Opa Music Group מזקקים קרוב לעשור של ניסיון בחיבור המדויק שבין מסורת לטירוף של המועדון. בחתונות דתיות ומעורבות, המטרה שלנו היא שכולם ירגישו שייכים – מהחופה ועד הסט האחרון של הלילה.
         
 
         </p>
-        <p className="mt-6 text-lg md:text-xl leading-relaxed text-muted-foreground font-body">
-          עם ניסיון של מאות אירועים, צוות מקצועי ותשוקה שלא נגמרת —
-          אנחנו כאן כדי להפוך כל רגע לבלתי נשכח.
+        <p className="mt-6 text-lg md:text-xl leading-relaxed text-muted-foreground font-body text-center">
+          Just Say Opa  
+        
         </p>
       </div>
     </section>);
