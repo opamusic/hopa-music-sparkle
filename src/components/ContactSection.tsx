@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useScrollReveal } from "./useScrollReveal";
 import { Phone, Mail, Instagram } from "lucide-react";
 
-const djs = ["DJ Aviv", "DJ Lior", "DJ Noam", "עדיין לא בחרתי"];
+const djs = ["ILAY ATTIAS", "ORI HOLLANDER", "ITAY ROZENGART", "עדיין לא בחרתי"];
 
 const ContactSection = () => {
   const { ref, isVisible } = useScrollReveal();

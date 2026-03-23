@@ -1,5 +1,11 @@
 import { useScrollReveal } from "./useScrollReveal";
-import ronaBand from "@/assets/rona-band.jpg";
+import { Music, Drum, Guitar } from "lucide-react";
+
+const instruments = [
+  { icon: Music, label: "סקסופון" },
+  { icon: Drum, label: "ג'מבה" },
+  { icon: Guitar, label: "גיטרה" },
+];
 
 const RonaSection = () => {
   const { ref, isVisible } = useScrollReveal();
@@ -9,33 +15,30 @@ const RonaSection = () => {
       <div ref={ref} className={`max-w-6xl mx-auto ${isVisible ? "" : "opacity-0"}`}>
         <div className={`text-center mb-14 transition-all duration-700 ${isVisible ? "animate-fade-up" : ""}`}>
           <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-2">RONA</h2>
-          <p className="text-muted-foreground text-lg font-body">להקת הבית של הופה</p>
+          <p className="text-muted-foreground text-lg font-body">הרכב חופה וכסא כלה מבית OPA</p>
           <div className="w-16 h-1 bg-primary mx-auto rounded-full mt-4" />
         </div>
 
-        <div className={`grid md:grid-cols-2 gap-10 items-center transition-all duration-700 ${isVisible ? "animate-fade-up" : ""}`} style={{ animationDelay: "200ms" }}>
-          <div className="rounded-2xl overflow-hidden shadow-xl">
-            <img
-              src={ronaBand}
-              alt="להקת רונא - להקת הבית של הופה"
-              loading="lazy"
-              width={1280}
-              height={720}
-              className="w-full aspect-video object-cover hover:scale-105 transition-transform duration-500"
-            />
-          </div>
-          <div className="font-body">
-            <h3 className="font-heading text-2xl font-bold text-foreground mb-4">הרכב חי. רגש אמיתי.</h3>
-            <p className="text-muted-foreground leading-relaxed mb-4">
-              רונא היא להקת החתונות של הופה — הרכב מוזיקלי חי שמביא את האנרגיה, הרגש והשמחה לכל רגע באירוע.
-            </p>
-            <p className="text-muted-foreground leading-relaxed mb-4">
-              מטקס החופה ועד כסא כלה, הלהקה שלנו יודעת להתאים את עצמה לכל רגע — עם רפרטואר עשיר שכולל מזרחית, פופ, רוק ושירי נשמה.
-            </p>
-            <p className="text-muted-foreground leading-relaxed">
-              כי כשמשלבים די-ג'יי מטורף עם להקה חיה — קורה קסם.
-            </p>
-          </div>
+        <div className={`grid grid-cols-3 gap-6 md:gap-10 max-w-2xl mx-auto transition-all duration-700 ${isVisible ? "animate-fade-up" : ""}`} style={{ animationDelay: "200ms" }}>
+          {instruments.map(({ icon: Icon, label }, i) => (
+            <div
+              key={label}
+              className="flex flex-col items-center gap-4 group"
+              style={{ animationDelay: `${i * 100}ms` }}
+            >
+              <div className="w-20 h-20 md:w-28 md:h-28 rounded-full bg-secondary flex items-center justify-center group-hover:bg-primary/10 group-hover:scale-110 transition-all duration-300">
+                <Icon className="w-8 h-8 md:w-12 md:h-12 text-primary" />
+              </div>
+              <span className="font-body text-sm md:text-base text-muted-foreground font-medium">{label}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className={`text-center mt-12 transition-all duration-700 ${isVisible ? "animate-fade-up" : ""}`} style={{ animationDelay: "400ms" }}>
+          <p className="text-muted-foreground leading-relaxed font-body max-w-xl mx-auto">
+            רונא היא להקת האינהאוס של הופה — הרכב חי שמביא רגש, אנרגיה ושמחה לכל רגע באירוע.
+            מטקס החופה ועד כסא כלה, כשמשלבים די-ג'יי מטורף עם להקה חיה — קורה קסם.
+          </p>
         </div>
       </div>
     </section>

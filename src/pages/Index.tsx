@@ -2,9 +2,10 @@ import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import DJsSection from "@/components/DJsSection";
+import ParallaxTicker from "@/components/ParallaxTicker";
 import RonaSection from "@/components/RonaSection";
-import FAQSection from "@/components/FAQSection";
 import ContactSection from "@/components/ContactSection";
+import FAQSection from "@/components/FAQSection";
 import Footer from "@/components/Footer";
 
 const Index = () => (
@@ -13,9 +14,10 @@ const Index = () => (
     <HeroSection />
     <AboutSection />
     <DJsSection />
+    <ParallaxTicker />
     <RonaSection />
-    <FAQSection />
     <ContactSection />
+    <FAQSection />
     <Footer />
   </>
 );
