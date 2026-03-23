@@ -92,7 +92,7 @@ const ContactSection = () => {
               <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center group-hover:bg-primary/10 transition-colors">
                 <Instagram className="w-5 h-5" />
               </div>
-              <span className="font-body text-lg">@opamusic</span>
+              <span className="font-body text-lg">@opamusic.co.il</span>
             </a>
           </div>
         </div>
