@@ -1,23 +1,40 @@
 import { useState, useEffect } from "react";
+import { Globe } from "lucide-react";
 import logoWhite from "@/assets/logo-white.png";
 import logoBlack from "@/assets/logo-black.png";
 
-const navLinks = [
+const navLinksHe = [
   { label: "מי אנחנו", href: "#about" },
   { label: "DJs", href: "#djs" },
   { label: "Rona", href: "#rona" },
   { label: "שאלות", href: "#faq" },
 ];
 
+const navLinksEn = [
+  { label: "About Us", href: "#about" },
+  { label: "DJs", href: "#djs" },
+  { label: "Rona", href: "#rona" },
+  { label: "FAQ", href: "#faq" },
+];
+
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [lang, setLang] = useState<"he" | "en">("he");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    document.documentElement.dir = lang === "he" ? "rtl" : "ltr";
+    document.documentElement.lang = lang;
+  }, [lang]);
+
+  const navLinks = lang === "he" ? navLinksHe : navLinksEn;
+  const ctaLabel = lang === "he" ? "צור קשר" : "Contact";
 
   return (
     <header
@@ -55,20 +72,40 @@ const Header = () => {
                 : "bg-white/20 text-primary-foreground backdrop-blur-sm border border-white/30 hover:bg-white/30"
             }`}
           >
-            צור קשר
+            {ctaLabel}
           </a>
+          <button
+            onClick={() => setLang(lang === "he" ? "en" : "he")}
+            className={`flex items-center gap-1.5 text-sm font-medium transition-colors duration-300 hover:text-primary ${
+              scrolled ? "text-foreground" : "text-primary-foreground"
+            }`}
+            aria-label="Switch language"
+          >
+            <Globe className="w-4 h-4" />
+            <span>{lang === "he" ? "EN" : "עב"}</span>
+          </button>
         </nav>
 
         {/* Mobile menu button */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className={`md:hidden flex flex-col gap-1.5 ${scrolled ? "text-foreground" : "text-primary-foreground"}`}
-          aria-label="Toggle menu"
-        >
-          <span className={`w-6 h-0.5 transition-all duration-300 ${scrolled ? "bg-foreground" : "bg-white"} ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
-          <span className={`w-6 h-0.5 transition-all duration-300 ${scrolled ? "bg-foreground" : "bg-white"} ${menuOpen ? "opacity-0" : ""}`} />
-          <span className={`w-6 h-0.5 transition-all duration-300 ${scrolled ? "bg-foreground" : "bg-white"} ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
-        </button>
+        <div className="md:hidden flex items-center gap-3">
+          <button
+            onClick={() => setLang(lang === "he" ? "en" : "he")}
+            className={`flex items-center gap-1 text-xs font-medium ${scrolled ? "text-foreground" : "text-primary-foreground"}`}
+            aria-label="Switch language"
+          >
+            <Globe className="w-4 h-4" />
+            <span>{lang === "he" ? "EN" : "עב"}</span>
+          </button>
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className={`flex flex-col gap-1.5 ${scrolled ? "text-foreground" : "text-primary-foreground"}`}
+            aria-label="Toggle menu"
+          >
+            <span className={`w-6 h-0.5 transition-all duration-300 ${scrolled ? "bg-foreground" : "bg-white"} ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
+            <span className={`w-6 h-0.5 transition-all duration-300 ${scrolled ? "bg-foreground" : "bg-white"} ${menuOpen ? "opacity-0" : ""}`} />
+            <span className={`w-6 h-0.5 transition-all duration-300 ${scrolled ? "bg-foreground" : "bg-white"} ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
@@ -90,7 +127,7 @@ const Header = () => {
               onClick={() => setMenuOpen(false)}
               className="bg-primary text-primary-foreground px-5 py-3 rounded-full text-center font-medium mt-2"
             >
-              צור קשר
+              {ctaLabel}
             </a>
           </nav>
         </div>
