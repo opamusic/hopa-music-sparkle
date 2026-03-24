@@ -1,26 +1,31 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Globe } from "lucide-react";
 import logoWhite from "@/assets/logo-white.png";
 import logoBlack from "@/assets/logo-black.png";
 
-const navLinksHe = [
-  { label: "מי אנחנו", href: "#about" },
-  { label: "DJs", href: "#djs" },
-  { label: "Rona", href: "#rona" },
-  { label: "שאלות", href: "#faq" },
-];
+interface HeaderProps {
+  lang: "he" | "en";
+  onToggleLanguage: () => void;
+}
 
-const navLinksEn = [
-  { label: "About Us", href: "#about" },
-  { label: "DJs", href: "#djs" },
-  { label: "Rona", href: "#rona" },
-  { label: "FAQ", href: "#faq" },
-];
+const navLinks = {
+  he: [
+    { label: "מי אנחנו", href: "#about" },
+    { label: "DJs", href: "#djs" },
+    { label: "RONA", href: "#rona" },
+    { label: "שאלות", href: "#faq" },
+  ],
+  en: [
+    { label: "About Us", href: "#about" },
+    { label: "DJs", href: "#djs" },
+    { label: "RONA", href: "#rona" },
+    { label: "FAQ", href: "#faq" },
+  ],
+};
 
-const Header = () => {
+const Header = ({ lang, onToggleLanguage }: HeaderProps) => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [lang, setLang] = useState<"he" | "en">("he");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -33,8 +38,9 @@ const Header = () => {
     document.documentElement.lang = lang;
   }, [lang]);
 
-  const navLinks = lang === "he" ? navLinksHe : navLinksEn;
-  const ctaLabel = lang === "he" ? "צור קשר" : "Contact";
+  const ctaLabel = lang === "he" ? "צור קשר" : "Contact Us";
+  const languageLabel = lang === "he" ? "החלפת שפה" : "Switch language";
+  const menuLabel = lang === "he" ? "פתיחת תפריט" : "Toggle menu";
 
   return (
     <header
@@ -53,7 +59,7 @@ const Header = () => {
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
+          {navLinks[lang].map((link) => (
             <a
               key={link.href}
               href={link.href}
@@ -75,11 +81,11 @@ const Header = () => {
             {ctaLabel}
           </a>
           <button
-            onClick={() => setLang(lang === "he" ? "en" : "he")}
+            onClick={onToggleLanguage}
             className={`flex items-center gap-1.5 text-sm font-medium transition-colors duration-300 hover:text-primary ${
               scrolled ? "text-foreground" : "text-primary-foreground"
             }`}
-            aria-label="Switch language"
+            aria-label={languageLabel}
           >
             <Globe className="w-4 h-4" />
             <span>{lang === "he" ? "EN" : "עב"}</span>
@@ -89,9 +95,9 @@ const Header = () => {
         {/* Mobile menu button */}
         <div className="md:hidden flex items-center gap-3">
           <button
-            onClick={() => setLang(lang === "he" ? "en" : "he")}
+            onClick={onToggleLanguage}
             className={`flex items-center gap-1 text-xs font-medium ${scrolled ? "text-foreground" : "text-primary-foreground"}`}
-            aria-label="Switch language"
+            aria-label={languageLabel}
           >
             <Globe className="w-4 h-4" />
             <span>{lang === "he" ? "EN" : "עב"}</span>
@@ -99,7 +105,7 @@ const Header = () => {
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className={`flex flex-col gap-1.5 ${scrolled ? "text-foreground" : "text-primary-foreground"}`}
-            aria-label="Toggle menu"
+            aria-label={menuLabel}
           >
             <span className={`w-6 h-0.5 transition-all duration-300 ${scrolled ? "bg-foreground" : "bg-white"} ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
             <span className={`w-6 h-0.5 transition-all duration-300 ${scrolled ? "bg-foreground" : "bg-white"} ${menuOpen ? "opacity-0" : ""}`} />
@@ -112,7 +118,7 @@ const Header = () => {
       {menuOpen && (
         <div className="md:hidden glass mt-2 mx-4 rounded-2xl p-6 animate-scale-in">
           <nav className="flex flex-col gap-4">
-            {navLinks.map((link) => (
+            {navLinks[lang].map((link) => (
               <a
                 key={link.href}
                 href={link.href}
