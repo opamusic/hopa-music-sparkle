@@ -8,7 +8,10 @@ import dj3 from "@/assets/dj3.jpg";
 interface DJ {
   name: string;
   image: string;
-  bio: string;
+  bio: {
+    he: string;
+    en: string;
+  };
   instagram: string;
   tiktok: string;
 }
@@ -17,21 +20,30 @@ const djs: DJ[] = [
   {
     name: "ILAY ATTIAS",
     image: dj1,
-    bio: "אילי הוא הלב הפועם של הופה. עם סגנון ייחודי שמשלב מזרחית, היפ-הופ ומוזיקה אלקטרונית, הוא יודע בדיוק איך לקרוא את הקהל ולהרים כל רחבה.",
+    bio: {
+      he: "אילי הוא הלב הפועם של הופה. עם סגנון ייחודי שמשלב מזרחית, היפ-הופ ומוזיקה אלקטרונית, הוא יודע בדיוק איך לקרוא את הקהל ולהרים כל רחבה.",
+      en: "Ilay is the beating heart of OPA. Blending Middle Eastern sounds, hip-hop, and electronic music, he reads every crowd and lifts every dancefloor.",
+    },
     instagram: "#",
     tiktok: "#",
   },
   {
     name: "ORI HOLLANDER",
     image: dj2,
-    bio: "אורי מביא אנרגיה בלתי נגמרת לכל אירוע. מומחה במוזיקת קלאבים ורמיקסים, הוא יודע ליצור אווירה שגורמת לכולם לרקוד עד השעות הקטנות.",
+    bio: {
+      he: "אורי מביא אנרגיה בלתי נגמרת לכל אירוע. מומחה במוזיקת קלאבים ורמיקסים, הוא יודע ליצור אווירה שגורמת לכולם לרקוד עד השעות הקטנות.",
+      en: "Ori brings nonstop energy to every event. A club music and remix specialist, he creates an atmosphere that keeps everyone moving all night.",
+    },
     instagram: "#",
     tiktok: "#",
   },
   {
     name: "ITAY ROZENGART",
     image: dj3,
-    bio: "איתי הוא המילניום של הקבוצה. סגנון טרנדי, תמיד עם האצבע על הדופק של המוזיקה החדשה ביותר. המומחיות שלו — לגרום לכל אירוע להרגיש כמו פסטיבל.",
+    bio: {
+      he: "איתי הוא המילניום של הקבוצה. סגנון טרנדי, תמיד עם האצבע על הדופק של המוזיקה החדשה ביותר. המומחיות שלו — לגרום לכל אירוע להרגיש כמו פסטיבל.",
+      en: "Itay brings a bold, trend-forward vibe and always stays on top of what is next. His specialty is making every event feel like a festival.",
+    },
     instagram: "#",
     tiktok: "#",
   },
@@ -59,16 +71,23 @@ const scribbleSignatures: Record<string, JSX.Element> = {
   ),
 };
 
-const DJsSection = () => {
+interface DJsSectionProps {
+  lang: "he" | "en";
+}
+
+const DJsSection = ({ lang }: DJsSectionProps) => {
   const { ref, isVisible } = useScrollReveal();
   const [selectedDJ, setSelectedDJ] = useState<DJ | null>(null);
+  const sectionTitle = lang === "he" ? "נבחרת הדי-ג'ייז" : "DJs";
+  const aboutLabel = lang === "he" ? "קצת על הדיג'יי" : "About the DJ";
+  const closeLabel = lang === "he" ? "סגירה" : "Close";
 
   return (
     <>
       <section id="djs" className="section-padding bg-muted/30">
         <div ref={ref} className={`max-w-6xl mx-auto ${isVisible ? "" : "opacity-0"}`}>
           <div className={`text-center mb-14 transition-all duration-700 ${isVisible ? "animate-fade-up" : ""}`}>
-            <h2 className="font-heading md:text-5xl text-foreground mb-2 text-4xl font-normal">DJs</h2>
+            <h2 className="font-heading md:text-5xl text-foreground mb-2 text-4xl font-normal">{sectionTitle}</h2>
             <div className="w-16 h-1 bg-primary mx-auto rounded-full" />
           </div>
 
@@ -133,6 +152,7 @@ const DJsSection = () => {
               <button
                 onClick={() => setSelectedDJ(null)}
                 className="absolute top-4 left-4 w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-white/90 transition-colors"
+                aria-label={closeLabel}
               >
                 <X className="w-5 h-5 text-foreground" />
               </button>
@@ -140,7 +160,8 @@ const DJsSection = () => {
               {/* Overlaid content on faded area */}
               <div className="absolute bottom-0 left-0 right-0 p-8">
                 <h3 className="font-heading text-3xl font-bold text-foreground mb-2">{selectedDJ.name}</h3>
-                <p className="text-foreground/80 leading-relaxed mb-4 font-body text-sm font-medium">{selectedDJ.bio}</p>
+                <p className="text-foreground font-body text-xs tracking-wide uppercase mb-1.5">{aboutLabel}</p>
+                <p className="text-foreground leading-relaxed mb-4 font-body text-sm font-medium">{selectedDJ.bio[lang]}</p>
                 <div className="flex items-center gap-4 mb-4">
                   <a href={selectedDJ.instagram} className="text-foreground/70 hover:text-primary transition-colors" aria-label="Instagram">
                     <Instagram className="w-5 h-5" />
