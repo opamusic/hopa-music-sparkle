@@ -31,7 +31,7 @@ const RonaSection = ({ lang }: RonaSectionProps) => {
   return (
     <section id="rona" className="section-padding bg-background">
       <div ref={ref} className={`max-w-6xl mx-auto ${isVisible ? "" : "opacity-0"}`}>
-        <div className={`text-center mb-14 transition-all duration-700 ${isVisible ? "animate-fade-up" : ""}`}>
+        <div className={`text-center mb-6 transition-all duration-700 ${isVisible ? "animate-fade-up" : ""}`}>
           <img
             src={ronaLogo}
             alt="RONA by OPA"
@@ -71,7 +71,7 @@ const RonaSection = ({ lang }: RonaSectionProps) => {
           className={`mt-12 transition-all duration-700 ${isVisible ? "animate-fade-up" : ""}`}
           style={{ animationDelay: "500ms" }}
         >
-          <div className="rounded-xl overflow-hidden shadow-md" style={{ boxShadow: "0 8px 24px -4px rgba(0,0,0,0.15)" }}>
+        <div className="overflow-hidden -mx-6 md:-mx-12 lg:-mx-20" style={{ boxShadow: "0 8px 24px -4px rgba(0,0,0,0.15)" }}>
             <img
               src={ronaBandPhoto}
               alt={lang === "he" ? "נגני רונה בהופעה" : "RONA musicians performing"}
