@@ -47,8 +47,8 @@ const ParallaxTicker = () => {
     <div className="overflow-hidden py-4 md:py-8 relative bg-background">
       {/* Strip 1 — 15deg, black bg, white+pink logos */}
       <div
-        className="relative -mx-40 mb-3"
-        style={{ background: "hsl(0, 0%, 5%)", transform: "rotate(-15deg)", transformOrigin: "center center" }}
+        className="relative mb-3"
+        style={{ background: "hsl(0, 0%, 5%)", transform: "rotate(-15deg) scale(1.3)", transformOrigin: "center center", marginLeft: "-20%", marginRight: "-20%" }}
       >
         <div
           ref={strip1Ref}
@@ -61,8 +61,8 @@ const ParallaxTicker = () => {
 
       {/* Strip 2 — 20deg opposite, pink bg, black+white logos */}
       <div
-        className="relative -mx-40"
-        style={{ background: "hsl(334, 100%, 55%)", transform: "rotate(20deg)", transformOrigin: "center center" }}
+        className="relative"
+        style={{ background: "hsl(334, 100%, 55%)", transform: "rotate(20deg) scale(1.3)", transformOrigin: "center center", marginLeft: "-20%", marginRight: "-20%" }}
       >
         <div
           ref={strip2Ref}
