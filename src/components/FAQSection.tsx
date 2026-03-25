@@ -25,7 +25,7 @@ const faqCategories = {
         },
         {
           q: "מה כולל חבילת הופה?",
-          a: "כל חבילה כוללת פגישת תיאום, התאמה מוזיקלית מלאה, ציוד סאונד ותאורה מקצועי, ואת האנרגיה האינסופית שלנו.",
+          a: "כל חבילה כוללת פגישת תיאום, התאמה מוזיקלית מלאה, ואת האנרגיה האינסופית שלנו.",
         },
       ],
     },
@@ -37,12 +37,12 @@ const faqCategories = {
           a: "אנחנו ממליצים לפחות 3-6 חודשים מראש, במיוחד בעונת החתונות. אבל תמיד שווה לשאול — לפעמים יש הפתעות.",
         },
         {
-          q: "האם אתם מביאים ציוד סאונד ותאורה?",
-          a: "כן! אנחנו מגיעים עם ציוד מקצועי שמותאם לגודל האירוע ולמקום. הכל כלול.",
-        },
-        {
           q: "איך נראית פגישת התיאום?",
           a: "פגישה אישית (או זום) שבה אנחנו מכירים אתכם, מבינים את הסגנון שלכם, ובונים יחד את המסע המוזיקלי של האירוע.",
+        },
+        {
+          q: "האם אפשר לבחור שירים ספציפיים?",
+          a: "כמובן! אנחנו עובדים יחד אתכם על פלייליסט מותאם אישית, כולל שירים מיוחדים לרגעים המשמעותיים באירוע.",
         },
       ],
     },
@@ -61,7 +61,7 @@ const faqCategories = {
         },
         {
           q: "What is included in an OPA package?",
-          a: "Each package includes a planning session, full musical curation, professional sound and lighting equipment, and our signature energy.",
+          a: "Each package includes a planning session, full musical curation, and our signature energy.",
         },
       ],
     },
@@ -73,12 +73,12 @@ const faqCategories = {
           a: "We recommend booking 3-6 months in advance, especially during wedding season, but always ask—sometimes we have surprises.",
         },
         {
-          q: "Do you provide sound and lighting equipment?",
-          a: "Yes. We arrive with professional equipment matched to your venue and event size. Everything is included.",
+          q: "How does the planning meeting work?",
+          a: "It is a personal meeting (or Zoom) where we get to know you, understand your style, and build your event's music journey together.",
         },
         {
-          q: "How does the planning meeting work?",
-          a: "It is a personal meeting (or Zoom) where we get to know you, understand your style, and build your event’s music journey together.",
+          q: "Can we choose specific songs?",
+          a: "Of course! We work with you on a custom playlist, including special songs for the key moments of your event.",
         },
       ],
     },

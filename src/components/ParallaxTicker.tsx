@@ -4,16 +4,16 @@ import logoBlack from "@/assets/logo-black.png";
 const ParallaxTicker = () => {
   const strip1Ref = useRef<HTMLDivElement>(null);
   const strip2Ref = useRef<HTMLDivElement>(null);
-  const angle = 9;
+  const angle = 7;
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       if (strip1Ref.current) {
-        strip1Ref.current.style.transform = `translateX(${scrollY * -0.35}px) rotate(-${angle}deg)`;
+        strip1Ref.current.style.transform = `translateX(${scrollY * -0.4}px) rotate(-${angle}deg)`;
       }
       if (strip2Ref.current) {
-        strip2Ref.current.style.transform = `translateX(${scrollY * 0.3 - 260}px) rotate(${angle}deg)`;
+        strip2Ref.current.style.transform = `translateX(${scrollY * 0.35 - 300}px) rotate(${angle}deg)`;
       }
     };
 
@@ -28,39 +28,51 @@ const ParallaxTicker = () => {
         key={i}
         src={logoBlack}
         alt="OPA"
-        className={`h-16 md:h-24 lg:h-28 transition-opacity duration-300 object-contain ${
-          i % 2 === 0 ? "opacity-85" : "opacity-65"
-        }`}
+        className="h-14 md:h-20 lg:h-24 object-contain shrink-0"
         style={
           i % 2 === 1
-            ? { filter: "brightness(0.35) sepia(1) hue-rotate(295deg) saturate(3.2)" }
-            : undefined
+            ? { filter: "brightness(0.35) sepia(1) hue-rotate(295deg) saturate(3.2)", opacity: 0.7 }
+            : { opacity: 0.85 }
         }
       />
     ));
 
   return (
-    <div
-      className="overflow-hidden py-16 md:py-20 relative"
-      style={{
-        background:
-          "linear-gradient(135deg, hsla(334,100%,70%,0.18) 0%, hsla(334,80%,85%,0.26) 50%, hsla(334,100%,70%,0.14) 100%)",
-      }}
-    >
+    <div className="overflow-hidden py-6 md:py-10 relative bg-background">
+      {/* Strip 1 - rotated negative, black bg */}
       <div
-        ref={strip1Ref}
-        className="gap-10 md:gap-16 lg:gap-20 whitespace-nowrap will-change-transform flex items-center mb-12"
-        style={{ width: "max-content", transform: `translateX(0px) rotate(-${angle}deg)` }}
+        className="relative -mx-20 mb-4"
+        style={{ background: "hsl(0, 0%, 5%)" }}
       >
-        {renderLogos(110)}
+        <div
+          ref={strip1Ref}
+          className="gap-8 md:gap-14 whitespace-nowrap will-change-transform flex items-center py-5 md:py-6"
+          style={{
+            width: "max-content",
+            transform: `translateX(0px) rotate(-${angle}deg)`,
+            filter: "brightness(0) invert(1)",
+          }}
+        >
+          {renderLogos(120)}
+        </div>
       </div>
 
+      {/* Strip 2 - rotated positive, pink bg */}
       <div
-        ref={strip2Ref}
-        className="gap-10 md:gap-16 lg:gap-20 whitespace-nowrap will-change-transform flex items-center"
-        style={{ width: "max-content", transform: `translateX(-260px) rotate(${angle}deg)` }}
+        className="relative -mx-20"
+        style={{ background: "hsl(334, 100%, 55%)" }}
       >
-        {renderLogos(110)}
+        <div
+          ref={strip2Ref}
+          className="gap-8 md:gap-14 whitespace-nowrap will-change-transform flex items-center py-5 md:py-6"
+          style={{
+            width: "max-content",
+            transform: `translateX(-300px) rotate(${angle}deg)`,
+            filter: "brightness(0) invert(1)",
+          }}
+        >
+          {renderLogos(120)}
+        </div>
       </div>
     </div>
   );
