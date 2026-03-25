@@ -37,7 +37,7 @@ const ParallaxTicker = () => {
           key={i}
           src={logoBlack}
           alt="OPA"
-          className="h-12 md:h-18 lg:h-22 object-contain shrink-0"
+          className="h-10 md:h-16 lg:h-20 object-contain shrink-0"
           style={style}
         />
       );
@@ -45,31 +45,43 @@ const ParallaxTicker = () => {
 
   return (
     <div className="overflow-hidden py-4 md:py-8 relative bg-background">
-      {/* Strip 1 — 15deg, black bg, white+pink logos */}
+      {/* Strip 1 — 15deg, black bg, pink+white logos */}
       <div
         className="relative mb-3"
-        style={{ background: "hsl(0, 0%, 5%)", transform: "rotate(-15deg) scale(1.3)", transformOrigin: "center center", marginLeft: "-20%", marginRight: "-20%" }}
+        style={{
+          background: "hsl(0, 0%, 5%)",
+          transform: "rotate(-15deg) scale(1.6)",
+          transformOrigin: "center center",
+          marginLeft: "-50%",
+          marginRight: "-50%",
+        }}
       >
         <div
           ref={strip1Ref}
-          className="gap-6 md:gap-10 whitespace-nowrap will-change-transform flex items-center py-4 md:py-5"
+          className="gap-4 md:gap-8 whitespace-nowrap will-change-transform flex items-center py-3 md:py-5"
           style={{ width: "max-content" }}
         >
-          {renderLogos(150, ["white", "pink", "white"])}
+          {renderLogos(200, ["pink", "white"])}
         </div>
       </div>
 
       {/* Strip 2 — 20deg opposite, pink bg, black+white logos */}
       <div
         className="relative"
-        style={{ background: "hsl(334, 100%, 55%)", transform: "rotate(20deg) scale(1.3)", transformOrigin: "center center", marginLeft: "-20%", marginRight: "-20%" }}
+        style={{
+          background: "hsl(334, 100%, 55%)",
+          transform: "rotate(20deg) scale(1.6)",
+          transformOrigin: "center center",
+          marginLeft: "-50%",
+          marginRight: "-50%",
+        }}
       >
         <div
           ref={strip2Ref}
-          className="gap-6 md:gap-10 whitespace-nowrap will-change-transform flex items-center py-4 md:py-5"
+          className="gap-4 md:gap-8 whitespace-nowrap will-change-transform flex items-center py-3 md:py-5"
           style={{ width: "max-content" }}
         >
-          {renderLogos(150, ["black", "white", "black"])}
+          {renderLogos(200, ["black", "white", "black"])}
         </div>
       </div>
     </div>
