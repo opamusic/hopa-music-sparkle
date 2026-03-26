@@ -44,16 +44,28 @@ const ParallaxTicker = () => {
     });
 
   return (
-    <div className="overflow-hidden py-4 md:py-8 relative bg-background">
-      {/* Strip 1 — 15deg, black bg, pink+white logos */}
+    <div
+      className="relative bg-background"
+      style={{
+        width: "100vw",
+        marginLeft: "calc(-50vw + 50%)",
+        overflow: "hidden",
+        minHeight: "400px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        padding: 0,
+      }}
+    >
+      {/* Strip 1 — Black bg, pink+white logos, rotated -15deg */}
       <div
-        className="relative mb-3"
+        className="absolute"
         style={{
           background: "hsl(0, 0%, 5%)",
-          transform: "rotate(-15deg) scale(1.6)",
-          transformOrigin: "center center",
-          marginLeft: "-50%",
-          marginRight: "-50%",
+          transform: "rotate(-15deg)",
+          width: "150vw",
+          left: "-25vw",
+          top: "25%",
         }}
       >
         <div
@@ -61,19 +73,19 @@ const ParallaxTicker = () => {
           className="gap-4 md:gap-8 whitespace-nowrap will-change-transform flex items-center py-3 md:py-5"
           style={{ width: "max-content" }}
         >
-          {renderLogos(200, ["pink", "white"])}
+          {renderLogos(300, ["pink", "white"])}
         </div>
       </div>
 
-      {/* Strip 2 — 20deg opposite, pink bg, black+white logos */}
+      {/* Strip 2 — Pink bg, black+white logos, rotated 20deg */}
       <div
-        className="relative"
+        className="absolute"
         style={{
           background: "hsl(334, 100%, 55%)",
-          transform: "rotate(20deg) scale(1.6)",
-          transformOrigin: "center center",
-          marginLeft: "-50%",
-          marginRight: "-50%",
+          transform: "rotate(20deg)",
+          width: "150vw",
+          left: "-25vw",
+          top: "45%",
         }}
       >
         <div
@@ -81,7 +93,7 @@ const ParallaxTicker = () => {
           className="gap-4 md:gap-8 whitespace-nowrap will-change-transform flex items-center py-3 md:py-5"
           style={{ width: "max-content" }}
         >
-          {renderLogos(200, ["black", "white", "black"])}
+          {renderLogos(300, ["black", "white", "black"])}
         </div>
       </div>
     </div>
