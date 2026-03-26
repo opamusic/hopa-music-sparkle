@@ -11,7 +11,7 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
   return (
     <section id="hero" className="relative h-screen overflow-hidden">
       <img
-        src="/lovable-uploads/4b27c686-808f-4aeb-a3de-c06712486d40.png"
+        src="/lovable-uploads/bdd84adf-4f86-4fc7-988a-5f52309e12c7.jpg"
         alt={imageAlt}
         className="absolute inset-0 w-full h-full object-cover"
         width={1080}
