@@ -4,15 +4,16 @@ import logoBlack from "@/assets/logo-black.png";
 const ParallaxTicker = () => {
   const strip1Ref = useRef<HTMLDivElement>(null);
   const strip2Ref = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       if (strip1Ref.current) {
-        strip1Ref.current.style.transform = `translateX(${scrollY * -0.5}px)`;
+        strip1Ref.current.style.transform = `translateX(${scrollY * -0.4}px)`;
       }
       if (strip2Ref.current) {
-        strip2Ref.current.style.transform = `translateX(${scrollY * 0.45 - 400}px)`;
+        strip2Ref.current.style.transform = `translateX(${scrollY * 0.4 - 600}px)`;
       }
     };
 
@@ -44,16 +45,16 @@ const ParallaxTicker = () => {
     });
 
   return (
-    <div className="overflow-hidden py-4 md:py-8 relative bg-background">
-      {/* Strip 1 — 15deg, black bg, pink+white logos */}
+    <div ref={sectionRef} className="overflow-hidden py-4 md:py-8 relative bg-background">
+      {/* Strip 1 — Black bg, pink+white logos, -15deg */}
       <div
         className="relative mb-3"
         style={{
           background: "hsl(0, 0%, 5%)",
-          transform: "rotate(-15deg) scale(1.6)",
+          width: "200vw",
+          left: "-50vw",
+          transform: "rotate(-15deg)",
           transformOrigin: "center center",
-          marginLeft: "-50%",
-          marginRight: "-50%",
         }}
       >
         <div
@@ -61,19 +62,19 @@ const ParallaxTicker = () => {
           className="gap-4 md:gap-8 whitespace-nowrap will-change-transform flex items-center py-3 md:py-5"
           style={{ width: "max-content" }}
         >
-          {renderLogos(200, ["pink", "white"])}
+          {renderLogos(300, ["pink", "white"])}
         </div>
       </div>
 
-      {/* Strip 2 — 20deg opposite, pink bg, black+white logos */}
+      {/* Strip 2 — Pink bg, black+white logos, 20deg */}
       <div
         className="relative"
         style={{
-          background: "hsl(334, 100%, 55%)",
-          transform: "rotate(20deg) scale(1.6)",
+          background: "#ff64ae",
+          width: "200vw",
+          left: "-50vw",
+          transform: "rotate(20deg)",
           transformOrigin: "center center",
-          marginLeft: "-50%",
-          marginRight: "-50%",
         }}
       >
         <div
@@ -81,7 +82,7 @@ const ParallaxTicker = () => {
           className="gap-4 md:gap-8 whitespace-nowrap will-change-transform flex items-center py-3 md:py-5"
           style={{ width: "max-content" }}
         >
-          {renderLogos(200, ["black", "white", "black"])}
+          {renderLogos(300, ["black", "white", "black"])}
         </div>
       </div>
     </div>
