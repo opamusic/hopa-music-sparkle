@@ -12,7 +12,7 @@ const ParallaxTicker = () => {
         strip1Ref.current.style.transform = `translateX(${scrollY * -0.5}px)`;
       }
       if (strip2Ref.current) {
-        strip2Ref.current.style.transform = `translateX(${scrollY * 0.45 - 400}px)`;
+        strip2Ref.current.style.transform = `translateX(${scrollY * 0.45 - 520}px)`;
       }
     };
 
@@ -21,47 +21,55 @@ const ParallaxTicker = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const renderLogos = (count: number, colorPattern: ("black" | "white" | "pink")[]) =>
+  const renderLogos = (count: number, colorPattern: ("black" | "white" | "pink")[], keyPrefix: string) =>
     Array.from({ length: count }).map((_, i) => {
       const color = colorPattern[i % colorPattern.length];
       let style: React.CSSProperties = {};
       if (color === "white") {
-        style = { filter: "brightness(0) invert(1)", opacity: 0.9 };
+        style = { filter: "brightness(0) invert(1)", opacity: 0.98 };
       } else if (color === "pink") {
-        style = { filter: "brightness(0.35) sepia(1) hue-rotate(295deg) saturate(3.2)", opacity: 0.85 };
+        style = {
+          filter:
+            "brightness(0) saturate(100%) invert(34%) sepia(97%) saturate(6057%) hue-rotate(313deg) brightness(105%) contrast(102%)",
+          opacity: 0.98,
+        };
       } else {
         style = { opacity: 0.9 };
       }
       return (
         <img
-          key={i}
+          key={`${keyPrefix}-${i}`}
           src={logoBlack}
           alt="OPA"
-          className="h-10 md:h-16 lg:h-20 object-contain shrink-0"
+          className="h-12 md:h-16 lg:h-20 object-contain shrink-0"
           style={style}
         />
       );
     });
 
+  const blackStripLogos = renderLogos(320, ["pink", "white"], "black-strip");
+  const pinkStripLogos = renderLogos(320, ["black", "white", "black"], "pink-strip");
+
   return (
-    <div className="overflow-hidden py-4 md:py-8 relative bg-background">
+    <div className="relative bg-background py-2 md:py-3 overflow-x-clip overflow-y-visible">
       {/* Strip 1 — 15deg, black bg, pink+white logos */}
       <div
         className="relative mb-3"
         style={{
-          background: "hsl(0, 0%, 5%)",
-          transform: "rotate(-15deg) scale(1.6)",
+          background: "hsl(var(--foreground))",
+          transform: "rotate(-15deg) scale(1.9)",
           transformOrigin: "center center",
-          marginLeft: "-50%",
-          marginRight: "-50%",
+          marginLeft: "-65%",
+          marginRight: "-65%",
         }}
       >
         <div
           ref={strip1Ref}
-          className="gap-4 md:gap-8 whitespace-nowrap will-change-transform flex items-center py-3 md:py-5"
+          className="gap-3 md:gap-6 whitespace-nowrap will-change-transform flex items-center py-4 md:py-6"
           style={{ width: "max-content" }}
         >
-          {renderLogos(200, ["pink", "white"])}
+          {blackStripLogos}
+          {renderLogos(320, ["pink", "white"], "black-strip-loop")}
         </div>
       </div>
 
@@ -69,19 +77,20 @@ const ParallaxTicker = () => {
       <div
         className="relative"
         style={{
-          background: "hsl(334, 100%, 55%)",
-          transform: "rotate(20deg) scale(1.6)",
+          background: "hsl(var(--primary))",
+          transform: "rotate(20deg) scale(1.9)",
           transformOrigin: "center center",
-          marginLeft: "-50%",
-          marginRight: "-50%",
+          marginLeft: "-65%",
+          marginRight: "-65%",
         }}
       >
         <div
           ref={strip2Ref}
-          className="gap-4 md:gap-8 whitespace-nowrap will-change-transform flex items-center py-3 md:py-5"
+          className="gap-3 md:gap-6 whitespace-nowrap will-change-transform flex items-center py-4 md:py-6"
           style={{ width: "max-content" }}
         >
-          {renderLogos(200, ["black", "white", "black"])}
+          {pinkStripLogos}
+          {renderLogos(320, ["black", "white", "black"], "pink-strip-loop")}
         </div>
       </div>
     </div>

@@ -79,7 +79,9 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
                   placeholder={labels.phone}
                   required
                   dir="ltr"
-                  className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all"
+                  className={`w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all ${
+                    lang === "he" ? "text-right placeholder:text-right" : ""
+                  }`}
                 />
 
                 <input
