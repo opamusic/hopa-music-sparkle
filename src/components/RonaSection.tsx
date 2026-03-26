@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import { useScrollReveal } from "./useScrollReveal";
 import { Drum, Guitar, Music } from "lucide-react";
 import ronaLogo from "@/assets/rona-logo.png";
@@ -28,31 +27,11 @@ const copy = {
 
 const RonaSection = ({ lang }: RonaSectionProps) => {
   const { ref, isVisible } = useScrollReveal();
-  const photoRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!photoRef.current) return;
-      const rect = photoRef.current.getBoundingClientRect();
-      const windowH = window.innerHeight;
-      const progress = (windowH - rect.top) / (windowH + rect.height);
-      const clampedProgress = Math.max(0, Math.min(1, progress));
-      const translateY = (clampedProgress - 0.5) * -30;
-      const img = photoRef.current.querySelector("img");
-      if (img) {
-        img.style.transform = `translateY(${translateY}px) scale(1.1)`;
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   return (
     <section id="rona" className="section-padding bg-background">
       <div ref={ref} className={`max-w-6xl mx-auto ${isVisible ? "" : "opacity-0"}`}>
-        <div className={`text-center mb-2 transition-all duration-700 ${isVisible ? "animate-fade-up" : ""}`}>
+        <div className={`text-center mb-6 transition-all duration-700 ${isVisible ? "animate-fade-up" : ""}`}>
           <img
             src={ronaLogo}
             alt="RONA by OPA"
@@ -87,18 +66,16 @@ const RonaSection = ({ lang }: RonaSectionProps) => {
           <p className="text-muted-foreground leading-relaxed font-body max-w-xl mx-auto">{copy[lang]}</p>
         </div>
 
-        {/* Band photo strip with parallax */}
+        {/* Band photo strip */}
         <div
-          ref={photoRef}
           className={`mt-12 transition-all duration-700 ${isVisible ? "animate-fade-up" : ""}`}
           style={{ animationDelay: "500ms" }}
         >
-          <div className="overflow-hidden -mx-6 md:-mx-12 lg:-mx-20" style={{ boxShadow: "0 8px 24px -4px rgba(0,0,0,0.15)" }}>
+        <div className="overflow-hidden -mx-6 md:-mx-12 lg:-mx-20" style={{ boxShadow: "0 8px 24px -4px rgba(0,0,0,0.15)" }}>
             <img
               src={ronaBandPhoto}
               alt={lang === "he" ? "נגני רונה בהופעה" : "RONA musicians performing"}
-              className="w-full h-40 md:h-56 object-cover object-center will-change-transform transition-transform duration-100"
-              style={{ transform: "scale(1.1)" }}
+              className="w-full h-40 md:h-56 object-cover object-center"
             />
           </div>
         </div>

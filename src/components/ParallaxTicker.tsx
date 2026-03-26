@@ -1,6 +1,26 @@
+import { useEffect, useRef } from "react";
 import logoBlack from "@/assets/logo-black.png";
 
 const ParallaxTicker = () => {
+  const strip1Ref = useRef<HTMLDivElement>(null);
+  const strip2Ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      if (strip1Ref.current) {
+        strip1Ref.current.style.transform = `translateX(${scrollY * -0.5}px)`;
+      }
+      if (strip2Ref.current) {
+        strip2Ref.current.style.transform = `translateX(${scrollY * 0.45 - 400}px)`;
+      }
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const renderLogos = (count: number, colorPattern: ("black" | "white" | "pink")[]) =>
     Array.from({ length: count }).map((_, i) => {
       const color = colorPattern[i % colorPattern.length];
@@ -23,46 +43,45 @@ const ParallaxTicker = () => {
       );
     });
 
-  const logoSet1 = renderLogos(40, ["pink", "white"]);
-  const logoSet2 = renderLogos(40, ["black", "white", "black"]);
-
   return (
-    <div className="overflow-hidden py-6 md:py-10 relative bg-background" style={{ minHeight: "280px" }}>
-      {/* Strip 1 — -15deg, black bg, pink+white logos */}
+    <div className="overflow-hidden py-4 md:py-8 relative bg-background">
+      {/* Strip 1 — 15deg, black bg, pink+white logos */}
       <div
-        className="absolute left-1/2 w-[300vw] -translate-x-1/2 mb-4"
+        className="relative mb-3"
         style={{
           background: "hsl(0, 0%, 5%)",
-          transform: "translateX(-50%) rotate(-15deg)",
-          top: "10%",
+          transform: "rotate(-15deg) scale(1.6)",
+          transformOrigin: "center center",
+          marginLeft: "-50%",
+          marginRight: "-50%",
         }}
       >
         <div
-          className="flex items-center gap-4 md:gap-8 py-3 md:py-5 animate-ticker-left"
+          ref={strip1Ref}
+          className="gap-4 md:gap-8 whitespace-nowrap will-change-transform flex items-center py-3 md:py-5"
           style={{ width: "max-content" }}
         >
-          {logoSet1}
-          {logoSet1}
-          {logoSet1}
+          {renderLogos(200, ["pink", "white"])}
         </div>
       </div>
 
       {/* Strip 2 — 20deg opposite, pink bg, black+white logos */}
       <div
-        className="absolute left-1/2 w-[300vw] -translate-x-1/2"
+        className="relative"
         style={{
           background: "hsl(334, 100%, 55%)",
-          transform: "translateX(-50%) rotate(20deg)",
-          bottom: "5%",
+          transform: "rotate(20deg) scale(1.6)",
+          transformOrigin: "center center",
+          marginLeft: "-50%",
+          marginRight: "-50%",
         }}
       >
         <div
-          className="flex items-center gap-4 md:gap-8 py-3 md:py-5 animate-ticker-right"
+          ref={strip2Ref}
+          className="gap-4 md:gap-8 whitespace-nowrap will-change-transform flex items-center py-3 md:py-5"
           style={{ width: "max-content" }}
         >
-          {logoSet2}
-          {logoSet2}
-          {logoSet2}
+          {renderLogos(200, ["black", "white", "black"])}
         </div>
       </div>
     </div>
