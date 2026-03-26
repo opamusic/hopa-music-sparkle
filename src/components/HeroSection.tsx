@@ -1,4 +1,4 @@
-
+import heroImage from "@/assets/hero-image.png";
 
 interface HeroSectionProps {
   lang: "he" | "en";
@@ -11,7 +11,7 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
   return (
     <section id="hero" className="relative h-screen overflow-hidden">
       <img
-        src="/lovable-uploads/bdd84adf-4f86-4fc7-988a-5f52309e12c7.jpg"
+        src={heroImage}
         alt={imageAlt}
         className="absolute inset-0 w-full h-full object-cover"
         width={1080}
