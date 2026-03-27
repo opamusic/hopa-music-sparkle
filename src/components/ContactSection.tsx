@@ -119,7 +119,10 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
               <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center group-hover:bg-primary/10 transition-colors">
                 <Phone className="w-5 h-5" />
               </div>
-              <span className="font-body text-lg" dir="ltr">050-123-4567</span>
+              <div className="flex flex-col">
+                <span className="font-body text-sm text-muted-foreground">{lang === "he" ? "טלפון" : "Phone"}</span>
+                <span className="font-body text-lg" dir="ltr">050-123-4567</span>
+              </div>
             </a>
             <a href="mailto:info@opamusic.co.il" className="flex items-center gap-3 text-foreground hover:text-primary transition-colors group">
               <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center group-hover:bg-primary/10 transition-colors">
