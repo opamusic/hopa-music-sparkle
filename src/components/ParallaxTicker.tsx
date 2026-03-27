@@ -44,13 +44,13 @@ const ParallaxTicker = () => {
     });
 
   return (
-    <div className="overflow-hidden py-10 md:py-16 relative bg-background">
+    <div className="relative bg-background" style={{ overflow: "visible", paddingTop: "2rem", paddingBottom: "2rem" }}>
       {/* Strip 1 — -15deg, black bg, pink+white logos */}
       <div
         className="relative mb-3"
         style={{
           background: "hsl(0, 0%, 5%)",
-          transform: "rotate(-15deg) scale(2.2)",
+          transform: "rotate(-15deg) scale(1.54)",
           transformOrigin: "center center",
           marginLeft: "-80%",
           marginRight: "-80%",
@@ -70,7 +70,7 @@ const ParallaxTicker = () => {
         className="relative"
         style={{
           background: "hsl(334, 100%, 55%)",
-          transform: "rotate(20deg) scale(2.2)",
+          transform: "rotate(20deg) scale(1.54)",
           transformOrigin: "center center",
           marginLeft: "-80%",
           marginRight: "-80%",

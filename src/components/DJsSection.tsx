@@ -78,7 +78,7 @@ interface DJsSectionProps {
 const DJsSection = ({ lang }: DJsSectionProps) => {
   const { ref, isVisible } = useScrollReveal();
   const [selectedDJ, setSelectedDJ] = useState<DJ | null>(null);
-  const sectionTitle = lang === "he" ? "נבחרת הדי-ג'ייז" : "DJs";
+  const sectionTitle = "Our DJ's";
   const aboutLabel = lang === "he" ? "קצת על הדיג'יי" : "About the DJ";
   const closeLabel = lang === "he" ? "סגירה" : "Close";
 
