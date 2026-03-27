@@ -8,6 +8,7 @@ import RonaSection from "@/components/RonaSection";
 import ContactSection from "@/components/ContactSection";
 import FAQSection from "@/components/FAQSection";
 import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 export type SiteLanguage = "he" | "en";
 
@@ -15,7 +16,7 @@ const Index = () => {
   const [lang, setLang] = useState<SiteLanguage>("he");
 
   return (
-    <>
+    <div className="overflow-hidden">
       <Header lang={lang} onToggleLanguage={() => setLang((prev) => (prev === "he" ? "en" : "he"))} />
       <HeroSection lang={lang} />
       <AboutSection lang={lang} />
@@ -25,8 +26,10 @@ const Index = () => {
       <ContactSection lang={lang} />
       <FAQSection lang={lang} />
       <Footer lang={lang} />
-    </>
+      <WhatsAppButton />
+    </div>
   );
 };
 
 export default Index;
+
