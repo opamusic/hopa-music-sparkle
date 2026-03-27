@@ -30,7 +30,7 @@ const RonaSection = ({ lang }: RonaSectionProps) => {
 
   return (
     <section id="rona" className="section-padding bg-background">
-      <div ref={ref} className={`max-w-6xl mx-auto ${isVisible ? "" : "opacity-0"}`}>
+      <div ref={ref} className={`max-w-5xl mx-auto bg-card rounded-2xl shadow-xl overflow-hidden p-6 md:p-10 ${isVisible ? "" : "opacity-0"}`}>
         <div className={`text-center mb-6 transition-all duration-700 ${isVisible ? "animate-fade-up" : ""}`}>
           <img
             src={ronaLogo}
