@@ -71,7 +71,7 @@ const RonaSection = ({ lang }: RonaSectionProps) => {
           className={`mt-12 transition-all duration-700 ${isVisible ? "animate-fade-up" : ""}`}
           style={{ animationDelay: "500ms" }}
         >
-        <div className="overflow-hidden -mx-6 md:-mx-12 lg:-mx-20" style={{ boxShadow: "0 8px 24px -4px rgba(0,0,0,0.15)" }}>
+        <div className="overflow-hidden rounded-xl" style={{ boxShadow: "0 8px 24px -4px rgba(0,0,0,0.15)" }}>
             <img
               src={ronaBandPhoto}
               alt={lang === "he" ? "נגני רונה בהופעה" : "RONA musicians performing"}
