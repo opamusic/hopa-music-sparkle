@@ -35,7 +35,7 @@ const RonaSection = ({ lang }: RonaSectionProps) => {
           <img
             src={ronaLogo}
             alt="RONA by OPA"
-            className="h-72 md:h-[28rem] mx-auto object-fill text-4xl"
+            className="h-72 md:h-[28rem] mx-auto object-fill text-4xl -mb-8 md:-mb-14"
           />
         </div>
 

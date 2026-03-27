@@ -44,16 +44,16 @@ const ParallaxTicker = () => {
     });
 
   return (
-    <div className="overflow-hidden py-4 md:py-8 relative bg-background">
-      {/* Strip 1 — 15deg, black bg, pink+white logos */}
+    <div className="overflow-hidden py-10 md:py-16 relative bg-background">
+      {/* Strip 1 — -15deg, black bg, pink+white logos */}
       <div
         className="relative mb-3"
         style={{
           background: "hsl(0, 0%, 5%)",
-          transform: "rotate(-15deg) scale(1.6)",
+          transform: "rotate(-15deg) scale(2.2)",
           transformOrigin: "center center",
-          marginLeft: "-50%",
-          marginRight: "-50%",
+          marginLeft: "-80%",
+          marginRight: "-80%",
         }}
       >
         <div
@@ -70,10 +70,10 @@ const ParallaxTicker = () => {
         className="relative"
         style={{
           background: "hsl(334, 100%, 55%)",
-          transform: "rotate(20deg) scale(1.6)",
+          transform: "rotate(20deg) scale(2.2)",
           transformOrigin: "center center",
-          marginLeft: "-50%",
-          marginRight: "-50%",
+          marginLeft: "-80%",
+          marginRight: "-80%",
         }}
       >
         <div
@@ -81,7 +81,7 @@ const ParallaxTicker = () => {
           className="gap-4 md:gap-8 whitespace-nowrap will-change-transform flex items-center py-3 md:py-5"
           style={{ width: "max-content" }}
         >
-          {renderLogos(200, ["black", "white", "black"])}
+          {renderLogos(200, ["pink", "white"])}
         </div>
       </div>
     </div>
