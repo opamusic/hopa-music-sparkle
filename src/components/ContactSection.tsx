@@ -121,7 +121,7 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
               </div>
               <div className="flex flex-col">
                 <span className="font-body text-sm text-muted-foreground">{lang === "he" ? "טלפון" : "Phone"}</span>
-                <span className="font-body text-lg" dir="ltr">050-123-4567</span>
+                <span className="font-body text-lg" dir="ltr">‪+972 52‑205‑1273‬</span>
               </div>
             </a>
             <a href="mailto:info@opamusic.co.il" className="flex items-center gap-3 text-foreground hover:text-primary transition-colors group">
