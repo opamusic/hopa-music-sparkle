@@ -71,7 +71,7 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
                 type="text"
                 placeholder={labels.fullName}
                 required
-                className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all text-left" />
+                className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all text-right" />
               
 
                 <input
@@ -79,17 +79,17 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
                 placeholder={labels.phone}
                 required
                 dir="ltr"
-                className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all text-left" />
+                className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all text-right" />
               
 
                 <input
                 type="email"
                 placeholder={labels.email}
-                className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all text-left" />
+                className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all text-right" />
               
 
                 <select
-                className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all appearance-none text-left"
+                className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all appearance-none text-right"
                 defaultValue="">
                 
                   <option value="" disabled>{labels.djSelect}</option>
@@ -101,7 +101,7 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
                 <textarea
                 placeholder={labels.notes}
                 rows={4}
-                className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all resize-none text-left" />
+                className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all resize-none text-right" />
               
 
                 <button
