@@ -9,11 +9,13 @@ import ContactSection from "@/components/ContactSection";
 import FAQSection from "@/components/FAQSection";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import AccessibilityStatement from "@/components/AccessibilityStatement";
 
 export type SiteLanguage = "he" | "en";
 
 const Index = () => {
   const [lang, setLang] = useState<SiteLanguage>("he");
+  const [accessibilityOpen, setAccessibilityOpen] = useState(false);
 
   return (
     <div className="overflow-hidden">
@@ -25,8 +27,9 @@ const Index = () => {
       <RonaSection lang={lang} />
       <ContactSection lang={lang} />
       <FAQSection lang={lang} />
-      <Footer lang={lang} />
+      <Footer lang={lang} onAccessibilityClick={() => setAccessibilityOpen(true)} />
       <WhatsAppButton />
+      <AccessibilityStatement open={accessibilityOpen} onClose={() => setAccessibilityOpen(false)} />
     </div>
   );
 };

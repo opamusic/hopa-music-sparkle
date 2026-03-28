@@ -3,6 +3,7 @@ import { Instagram } from "lucide-react";
 
 interface FooterProps {
   lang: "he" | "en";
+  onAccessibilityClick?: () => void;
 }
 
 const Footer = ({ lang }: FooterProps) => {
