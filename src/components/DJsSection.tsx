@@ -4,6 +4,9 @@ import { X, Instagram } from "lucide-react";
 import dj1 from "@/assets/dj1.jpg";
 import dj2 from "@/assets/dj2.jpg";
 import dj3 from "@/assets/dj3.jpg";
+import sigIlay from "@/assets/sig-ilay.png";
+import sigOri from "@/assets/sig-ori.png";
+import sigItay from "@/assets/sig-itay.png";
 
 interface DJ {
   name: string;
@@ -21,8 +24,8 @@ const djs: DJ[] = [
     name: "ILAY ATTIAS",
     image: dj1,
     bio: {
-      he: "אילי הוא הלב הפועם של הופה. עם סגנון ייחודי שמשלב מזרחית, היפ-הופ ומוזיקה אלקטרונית, הוא יודע בדיוק איך לקרוא את הקהל ולהרים כל רחבה.",
-      en: "Ilay is the beating heart of OPA. Blending Middle Eastern sounds, hip-hop, and electronic music, he reads every crowd and lifts every dancefloor.",
+      he: "אחרי עשור על העמדה, עילאי יודע בדיוק איך להדביק את כולם באנרגיה גבוהה ועריכות ייחודיות. הוא מייצר עבורכם מסיבה כזאת שכל האורחים ידברו עליה הרבה אחרי שהיא תיגמר.",
+      en: "After a decade behind the decks, Ilay knows exactly how to get everyone hooked with high energy and unique edits. He creates the kind of party your guests will talk about long after it's over.",
     },
     instagram: "#",
     tiktok: "#",
@@ -31,8 +34,8 @@ const djs: DJ[] = [
     name: "ORI HOLLANDER",
     image: dj2,
     bio: {
-      he: "אורי מביא אנרגיה בלתי נגמרת לכל אירוע. מומחה במוזיקת קלאבים ורמיקסים, הוא יודע ליצור אווירה שגורמת לכולם לרקוד עד השעות הקטנות.",
-      en: "Ori brings nonstop energy to every event. A club music and remix specialist, he creates an atmosphere that keeps everyone moving all night.",
+      he: "עם רמיקסים בלעדיים ואנרגיה מטורפת, אורי כאן כדי להפוך את הרחבה שלכם למסיבה מטורפת שלא עוצרת. הוא מוודא שכל האורחים שלכם ירגישו את הטירוף הזה בכל רגע מחדש.",
+      en: "With exclusive remixes and insane energy, Ori is here to turn your dancefloor into a non-stop party. He makes sure every guest feels the madness at every moment.",
     },
     instagram: "#",
     tiktok: "#",
@@ -41,34 +44,18 @@ const djs: DJ[] = [
     name: "ITAY ROZENGART",
     image: dj3,
     bio: {
-      he: "איתי הוא המילניום של הקבוצה. סגנון טרנדי, תמיד עם האצבע על הדופק של המוזיקה החדשה ביותר. המומחיות שלו — לגרום לכל אירוע להרגיש כמו פסטיבל.",
-      en: "Itay brings a bold, trend-forward vibe and always stays on top of what is next. His specialty is making every event feel like a festival.",
+      he: "איתי מגיע מעולם המועדונים ומביא את הוויב המדויק של הלילה ישר לחתונה שלכם. הוא יודע איך לייצר מסיבה מטורפת, כזו שגורמת לכל האורחים פשוט להיכנס לתוך המוזיקה וליהנות.",
+      en: "Itay comes from the club scene and brings the exact nightlife vibe straight to your wedding. He knows how to create an insane party that pulls every guest into the music.",
     },
     instagram: "#",
     tiktok: "#",
   },
 ];
 
-// SVG scribble signatures for each DJ
-const scribbleSignatures: Record<string, JSX.Element> = {
-  "ILAY ATTIAS": (
-    <svg viewBox="0 0 200 60" className="w-32 h-10" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M10 45 C15 20, 25 15, 30 40 C35 50, 40 10, 50 25 C55 35, 58 20, 65 30 C70 38, 80 15, 90 25 C95 30, 100 20, 110 28 C115 32, 125 18, 135 22 C140 24, 148 30, 155 20 C160 14, 170 35, 180 25 C185 20, 190 30, 195 28" stroke="hsl(334, 100%, 70%)" strokeWidth="2.5" strokeLinecap="round" fill="none" opacity="0.9"/>
-      <path d="M60 48 C70 42, 85 50, 95 44 C105 38, 115 48, 130 42" stroke="hsl(334, 100%, 70%)" strokeWidth="1.5" strokeLinecap="round" fill="none" opacity="0.6"/>
-    </svg>
-  ),
-  "ORI HOLLANDER": (
-    <svg viewBox="0 0 200 60" className="w-32 h-10" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M8 35 C12 15, 20 45, 28 20 C33 8, 42 40, 50 22 C55 12, 65 38, 75 18 C82 5, 92 42, 100 20 C108 5, 118 35, 128 18 C135 8, 142 40, 152 25 C158 15, 168 38, 178 22 C185 12, 192 32, 198 28" stroke="hsl(334, 100%, 70%)" strokeWidth="2.5" strokeLinecap="round" fill="none" opacity="0.9"/>
-      <path d="M40 52 C55 46, 70 54, 85 48 C100 42, 115 52, 130 46" stroke="hsl(334, 100%, 70%)" strokeWidth="1.5" strokeLinecap="round" fill="none" opacity="0.6"/>
-    </svg>
-  ),
-  "ITAY ROZENGART": (
-    <svg viewBox="0 0 200 60" className="w-32 h-10" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M5 40 C10 18, 18 48, 25 22 C30 8, 38 42, 48 18 C55 5, 62 35, 72 15 C80 2, 88 38, 98 15 C106 0, 115 40, 125 18 C132 5, 140 35, 150 20 C157 10, 165 38, 175 22 C182 12, 190 35, 198 30" stroke="hsl(334, 100%, 70%)" strokeWidth="2.5" strokeLinecap="round" fill="none" opacity="0.9"/>
-      <path d="M50 50 C62 44, 75 52, 90 46 C105 40, 118 50, 135 44 C148 38, 160 48, 170 42" stroke="hsl(334, 100%, 70%)" strokeWidth="1.5" strokeLinecap="round" fill="none" opacity="0.6"/>
-    </svg>
-  ),
+const djSignatures: Record<string, string> = {
+  "ILAY ATTIAS": sigIlay,
+  "ORI HOLLANDER": sigOri,
+  "ITAY ROZENGART": sigItay,
 };
 
 interface DJsSectionProps {
@@ -172,7 +159,9 @@ const DJsSection = ({ lang }: DJsSectionProps) => {
                     </svg>
                   </a>
                 </div>
-                {scribbleSignatures[selectedDJ.name]}
+                {djSignatures[selectedDJ.name] && (
+                  <img src={djSignatures[selectedDJ.name]} alt={`${selectedDJ.name} signature`} className="h-14 w-auto object-contain opacity-80" />
+                )}
               </div>
             </div>
           </div>
