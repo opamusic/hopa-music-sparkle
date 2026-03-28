@@ -8,7 +8,7 @@ interface ContactSectionProps {
 
 const djsByLang = {
   he: ["ILAY ATTIAS", "ORI HOLLANDER", "ITAY ROZENGART", "עדיין לא בחרתי"],
-  en: ["ILAY ATTIAS", "ORI HOLLANDER", "ITAY ROZENGART", "Haven't decided yet"],
+  en: ["ILAY ATTIAS", "ORI HOLLANDER", "ITAY ROZENGART", "Haven't decided yet"]
 };
 
 const copy = {
@@ -22,7 +22,7 @@ const copy = {
     email: "אימייל",
     djSelect: "מי הדי-ג'יי שמעניין אותך?",
     notes: "ספרו לנו על האירוע שלכם...",
-    submit: "שליחה",
+    submit: "שליחה"
   },
   en: {
     title: "Contact",
@@ -34,8 +34,8 @@ const copy = {
     email: "Email",
     djSelect: "Which DJ are you interested in?",
     notes: "Tell us about your event...",
-    submit: "Send",
-  },
+    submit: "Send"
+  }
 };
 
 const ContactSection = ({ lang }: ContactSectionProps) => {
@@ -59,59 +59,59 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
 
         <div className={`grid md:grid-cols-5 gap-10 transition-all duration-700 ${isVisible ? "animate-fade-up" : ""}`} style={{ animationDelay: "200ms" }}>
           <div className="md:col-span-3">
-            {submitted ? (
-              <div className="bg-secondary rounded-2xl p-12 text-center">
+            {submitted ?
+            <div className="bg-secondary rounded-2xl p-12 text-center">
                 <div className="text-5xl mb-4">🎉</div>
                 <h3 className="font-heading text-2xl font-bold text-foreground mb-2">{labels.thankYou}</h3>
                 <p className="text-muted-foreground font-body">{labels.thankYouText}</p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
+              </div> :
+
+            <form onSubmit={handleSubmit} className="space-y-4">
                 <input
-                  type="text"
-                  placeholder={labels.fullName}
-                  required
-                  className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all"
-                />
+                type="text"
+                placeholder={labels.fullName}
+                required
+                className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all" />
+              
 
                 <input
-                  type="tel"
-                  placeholder={labels.phone}
-                  required
-                  dir="ltr"
-                  className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all"
-                />
+                type="tel"
+                placeholder={labels.phone}
+                required
+                dir="ltr"
+                className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all text-right" />
+              
 
                 <input
-                  type="email"
-                  placeholder={labels.email}
-                  className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all"
-                />
+                type="email"
+                placeholder={labels.email}
+                className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all" />
+              
 
                 <select
-                  className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all appearance-none"
-                  defaultValue=""
-                >
+                className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all appearance-none"
+                defaultValue="">
+                
                   <option value="" disabled>{labels.djSelect}</option>
-                  {djsByLang[lang].map((dj) => (
-                    <option key={dj} value={dj}>{dj}</option>
-                  ))}
+                  {djsByLang[lang].map((dj) =>
+                <option key={dj} value={dj}>{dj}</option>
+                )}
                 </select>
 
                 <textarea
-                  placeholder={labels.notes}
-                  rows={4}
-                  className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all resize-none"
-                />
+                placeholder={labels.notes}
+                rows={4}
+                className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all resize-none" />
+              
 
                 <button
-                  type="submit"
-                  className="w-full py-4 rounded-xl bg-primary text-primary-foreground font-heading font-semibold text-lg hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-lg"
-                >
+                type="submit"
+                className="w-full py-4 rounded-xl bg-primary text-primary-foreground font-heading font-semibold text-lg hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-lg">
+                
                   {labels.submit}
                 </button>
               </form>
-            )}
+            }
           </div>
 
           <div className="md:col-span-2 flex flex-col justify-center gap-6">
@@ -139,8 +139,8 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 export default ContactSection;
