@@ -128,8 +128,7 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
               <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center group-hover:bg-primary/10 transition-colors">
                 <Mail className="w-5 h-5" />
               </div>
-              <span className="font-body text-lg">opadjs.il@gmail.com
-</span>
+              <span className="font-body text-lg">info@opamusic.co.il</span>
             </a>
             <a href="#" className="flex items-center gap-3 text-foreground hover:text-primary transition-colors group">
               <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center group-hover:bg-primary/10 transition-colors">
@@ -141,6 +140,7 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
         </div>
       </div>
     </section>);
+
 };
 
 export default ContactSection;
