@@ -6,7 +6,7 @@ interface FooterProps {
   onAccessibilityClick?: () => void;
 }
 
-const Footer = ({ lang }: FooterProps) => {
+const Footer = ({ lang, onAccessibilityClick }: FooterProps) => {
   const copy = {
     he: {
       rights: "© כל הזכויות שמורות.",
@@ -37,7 +37,7 @@ const Footer = ({ lang }: FooterProps) => {
 
         <div className="text-center md:text-left text-sm text-muted-foreground font-body space-y-1">
           <p>© {new Date().getFullYear()} OPA Music Group. {copy[lang].rights}</p>
-          <p><a href="#" className="hover:text-primary transition-colors">{copy[lang].accessibility}</a></p>
+          <p><button onClick={onAccessibilityClick} className="hover:text-primary transition-colors cursor-pointer">{copy[lang].accessibility}</button></p>
         </div>
       </div>
     </footer>
