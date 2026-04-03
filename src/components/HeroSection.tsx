@@ -1,4 +1,5 @@
 import heroImage from "@/assets/hero-image.png";
+import heroDesktop from "@/assets/hero-desktop.png";
 
 interface HeroSectionProps {
   lang: "he" | "en";
@@ -10,12 +11,20 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
 
   return (
     <section id="hero" className="relative h-screen overflow-hidden">
+      {/* Mobile hero */}
       <img
         src={heroImage}
         alt={imageAlt}
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover md:hidden"
         width={1080}
         height={1620} />
+      {/* Desktop hero */}
+      <img
+        src={heroDesktop}
+        alt={imageAlt}
+        className="absolute inset-0 w-full h-full object-cover hidden md:block"
+        width={1920}
+        height={1080} />
       
 
       {/* Gradient overlay at bottom */}
