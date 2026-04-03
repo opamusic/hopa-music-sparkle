@@ -12,13 +12,13 @@ const navLinks = {
   he: [
     { label: "About Us", href: "#about" },
     { label: "DJs", href: "#djs" },
-    { label: "RONA", href: "#rona" },
+    { label: "Rona", href: "#rona" },
     { label: "שאלות", href: "#faq" },
   ],
   en: [
     { label: "About Us", href: "#about" },
     { label: "DJs", href: "#djs" },
-    { label: "RONA", href: "#rona" },
+    { label: "Rona", href: "#rona" },
     { label: "FAQ", href: "#faq" },
   ],
 };
