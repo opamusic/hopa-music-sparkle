@@ -18,7 +18,7 @@ const Index = () => {
   const [accessibilityOpen, setAccessibilityOpen] = useState(false);
 
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-x-hidden">
       <Header lang={lang} onToggleLanguage={() => setLang((prev) => (prev === "he" ? "en" : "he"))} />
       <HeroSection lang={lang} />
       <AboutSection lang={lang} />
