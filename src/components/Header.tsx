@@ -10,7 +10,7 @@ interface HeaderProps {
 
 const navLinks = {
   he: [
-    { label: "מי אנחנו", href: "#about" },
+    { label: "About Us", href: "#about" },
     { label: "DJs", href: "#djs" },
     { label: "RONA", href: "#rona" },
     { label: "שאלות", href: "#faq" },
