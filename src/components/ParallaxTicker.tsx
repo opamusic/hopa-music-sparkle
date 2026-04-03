@@ -6,19 +6,33 @@ const ParallaxTicker = () => {
   const strip2Ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
+    let ticking = false;
+
+    const updatePositions = () => {
+      const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
       if (strip1Ref.current) {
         strip1Ref.current.style.transform = `translateX(${scrollY * -0.5}px)`;
       }
       if (strip2Ref.current) {
         strip2Ref.current.style.transform = `translateX(${scrollY * 0.45 - 400}px)`;
       }
+      ticking = false;
     };
 
-    handleScroll();
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(updatePositions);
+        ticking = true;
+      }
+    };
+
+    updatePositions();
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("touchmove", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("touchmove", handleScroll);
+    };
   }, []);
 
   const renderLogos = (count: number, colorPattern: ("black" | "white" | "pink")[]) =>
