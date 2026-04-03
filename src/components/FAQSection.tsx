@@ -10,77 +10,65 @@ interface FAQSectionProps {
   lang: "he" | "en";
 }
 
-const faqCategories = {
+const faqItems = {
   he: [
     {
-      title: "למה דווקא הופה?",
-      items: [
-        {
-          q: "מה מבדיל את הופה מדי-ג'ייז אחרים?",
-          a: "אנחנו לא רק שמים מוזיקה — אנחנו יוצרים חוויה. כל די-ג'יי בהופה עובר תהליך מקצועי, ואנחנו מתאימים את הסגנון המוזיקלי בדיוק לזוג ולאירוע.",
-        },
-        {
-          q: "האם אתם מתאימים גם לאירועים קטנים?",
-          a: "בהחלט! אנחנו מאמינים שכל אירוע ראוי לחוויה מטורפת, בין אם מדובר ב-50 או 500 אורחים.",
-        },
-        {
-          q: "מה כולל חבילת הופה?",
-          a: "כל חבילה כוללת פגישת תיאום, התאמה מוזיקלית מלאה, ואת האנרגיה האינסופית שלנו.",
-        },
-      ],
+      q: "איך מתבצעת בחירת המוזיקה? אנחנו חלק מהתהליך?",
+      a: "חד משמעית כן. האירוע הוא שלכם, והקו המוזיקלי חייב לשקף את הטעם האישי שלכם. כחלק מהתהליך נקיים פגישת תיאום מוזיקלי מעמיקה, בה נגדיר יחד את הסגנונות המועדפים, נבנה את האווירה לכל שלב בערב (קבלת פנים, חופה ומסיבה), ונדייק את הפלייליסט כך שתרגישו הכי בנוח על הרחבה.",
     },
     {
-      title: "שאלות טכניות",
-      items: [
-        {
-          q: "כמה זמן מראש צריך להזמין?",
-          a: "אנחנו ממליצים לפחות 3-6 חודשים מראש, במיוחד בעונת החתונות. אבל תמיד שווה לשאול — לפעמים יש הפתעות.",
-        },
-        {
-          q: "איך נראית פגישת התיאום?",
-          a: "פגישה אישית (או זום) שבה אנחנו מכירים אתכם, מבינים את הסגנון שלכם, ובונים יחד את המסע המוזיקלי של האירוע.",
-        },
-        {
-          q: "האם אפשר לבחור שירים ספציפיים?",
-          a: "כמובן! אנחנו עובדים יחד אתכם על פלייליסט מותאם אישית, כולל שירים מיוחדים לרגעים המשמעותיים באירוע.",
-        },
-      ],
+      q: "אנחנו זוג דתי/מסורתי וחשוב לנו שהמסיבה תהיה מטורפת. זה משתלב?",
+      a: "זה לא רק משתלב, זה ה-DNA של Opa. המומחיות שלנו היא בדיוק בנקודת החיבור הזו – יצירת איזון מושלם בין עולמות. אנחנו יודעים לתת את המקום המכובד למסורת ולמוזיקה היהודית/חסידית, ולבצע מעבר חלק וטבעי למסיבת מיינסטרים עדכנית ואנרגטית. המטרה שלנו היא שכל האורחים שלכם ירגישו חלק מהחגיגה, בלי פשרות על הרמה המוזיקלית.",
+    },
+    {
+      q: "מה היתרון בשילוב של להקה בקבלת הפנים והחופה?",
+      a: 'זה השילוב שמעניק לכם פתרון שלם ומנצח. הלהקה (בין אם זו להקת "כיסא כלה וחופה" או הרכבים שאנחנו עובדים איתם) מספקת מענה חי, מרגש ואותנטי ברגעים המרגשים של תחילת הערב. מיד לאחר מכן, ה-DJ שלנו נכנס לעמדה כדי להרים את האנרגיה למקסימום. אתם נהנים מכל העולמות – לייב מרגש בהתחלה, ומסיבת DJ מדויקת ומקפיצה בהמשך.',
+    },
+    {
+      q: "אפשר להעביר רשימת שירים ספציפיים?",
+      a: 'בוודאי. אנחנו מאוד אוהבים לקבל מהזוגות שלנו רשימת שירים שהם אוהבים במיוחד - זה ה"מצפן" שלנו להבנת הטעם שלכם לעומק. במהלך האירוע נשלב את הבקשות שלכם תוך קריאת הקהל בזמן אמת, כדי להבטיח שהרחבה תישאר מלאה והאנרגיה תהיה בשיא.',
+    },
+    {
+      q: "איך משריינים איתנו את התאריך?",
+      a: "הכל מתחיל בשיחת היכרות קצרה כדי להרגיש את ה-Vibe ולהבין את אופי האירוע שלכם. לאחר מכן נשלח הצעת מחיר מסודרת, ולאחר סגירת התאריך נתאם את פגישת המוזיקה שבה נצלול לפרטים הקטנים ונתכנן את הערב המושלם עבורכם.",
+    },
+    {
+      q: "האם יש הגבלה של שעות?",
+      a: "ב-Opa אין הגבלת שעות. אנחנו מלווים אתכם מהרגע הראשון ועד שאחרון הרוקדים. אנחנו שם כדי לתת את הערב הכי שמח שיש.",
+    },
+    {
+      q: "היכן אתם עובדים בארץ?",
+      a: "אנחנו מגיעים לכל מקום שבו יש רחבה להעיף אתכם!",
     },
   ],
   en: [
     {
-      title: "Why OPA?",
-      items: [
-        {
-          q: "What makes OPA different from other DJs?",
-          a: "We do not just play music—we design an experience. Every OPA DJ goes through a professional process, and we tailor the sound to each couple and event.",
-        },
-        {
-          q: "Are you also a fit for smaller events?",
-          a: "Absolutely. Every event deserves an unforgettable vibe, whether it is 50 guests or 500.",
-        },
-        {
-          q: "What is included in an OPA package?",
-          a: "Each package includes a planning session, full musical curation, and our signature energy.",
-        },
-      ],
+      q: "How does the music selection work? Are we part of the process?",
+      a: "Absolutely yes. It's your event, and the musical direction must reflect your personal taste. As part of the process, we hold an in-depth music coordination meeting where we define preferred styles together, build the atmosphere for each stage of the evening (cocktail hour, ceremony, and party), and fine-tune the playlist so you feel completely comfortable on the dance floor.",
     },
     {
-      title: "Technical Questions",
-      items: [
-        {
-          q: "How far in advance should we book?",
-          a: "We recommend booking 3-6 months in advance, especially during wedding season, but always ask—sometimes we have surprises.",
-        },
-        {
-          q: "How does the planning meeting work?",
-          a: "It is a personal meeting (or Zoom) where we get to know you, understand your style, and build your event's music journey together.",
-        },
-        {
-          q: "Can we choose specific songs?",
-          a: "Of course! We work with you on a custom playlist, including special songs for the key moments of your event.",
-        },
-      ],
+      q: "We're a religious/traditional couple and want an amazing party. Does that work?",
+      a: "It doesn't just work — it's Opa's DNA. Our expertise is exactly at this connection point — creating a perfect balance between worlds. We know how to give proper respect to tradition and Jewish/Hasidic music, and make a smooth, natural transition to an up-to-date, energetic mainstream party. Our goal is for all your guests to feel part of the celebration, without compromising on musical quality.",
+    },
+    {
+      q: "What's the advantage of combining a band for the cocktail hour and ceremony?",
+      a: "It's the combination that gives you a complete winning solution. The band provides a live, emotional, and authentic experience during the touching moments at the start of the evening. Right after, our DJ takes the stage to push the energy to the max. You enjoy the best of both worlds — an emotional live start, and a precise, pumping DJ party to follow.",
+    },
+    {
+      q: "Can we submit a specific song list?",
+      a: "Of course. We love receiving song lists from our couples — it's our compass for understanding your taste deeply. During the event, we'll incorporate your requests while reading the crowd in real time, ensuring the dance floor stays full and the energy peaks.",
+    },
+    {
+      q: "How do we reserve our date?",
+      a: "It all starts with a short introductory call to feel the vibe and understand your event's character. Then we'll send a detailed quote, and after locking in the date, we'll schedule the music meeting where we dive into the details and plan the perfect evening for you.",
+    },
+    {
+      q: "Is there a time limit?",
+      a: "At Opa, there's no time limit. We're with you from the very first moment until the last dancer leaves. We're there to give you the happiest night possible.",
+    },
+    {
+      q: "Where do you work in the country?",
+      a: "We come to anywhere there's a dance floor to rock!",
     },
   ],
 };
