@@ -85,29 +85,22 @@ const FAQSection = ({ lang }: FAQSectionProps) => {
           <div className="w-16 h-1 bg-primary mx-auto rounded-full" />
         </div>
 
-        <div className={`space-y-10 transition-all duration-700 ${isVisible ? "animate-fade-up" : ""}`} style={{ animationDelay: "200ms" }}>
-          {faqCategories[lang].map((cat) => (
-            <div key={cat.title}>
-              <h3 className="font-heading text-xl font-semibold text-foreground mb-4">{cat.title}</h3>
-              <Accordion type="single" collapsible className="space-y-2">
-                {cat.items.map((item, i) => (
-                  <AccordionItem
-                    key={i}
-                    value={`${cat.title}-${i}`}
-                    className="bg-card rounded-xl border-none px-5 shadow-sm"
-                  >
-                    <AccordionTrigger className="text-right font-body font-medium text-foreground hover:text-primary hover:no-underline py-4">
-                      {item.q}
-                    </AccordionTrigger>
-                    <AccordionContent className="text-muted-foreground font-body leading-relaxed pb-4">
-                      {item.a}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </div>
+        <Accordion type="single" collapsible className={`space-y-2 transition-all duration-700 ${isVisible ? "animate-fade-up" : ""}`} style={{ animationDelay: "200ms" }}>
+          {faqItems[lang].map((item, i) => (
+            <AccordionItem
+              key={i}
+              value={`faq-${i}`}
+              className="bg-card rounded-xl border-none px-5 shadow-sm"
+            >
+              <AccordionTrigger className="text-right font-body font-medium text-foreground hover:text-primary hover:no-underline py-4">
+                {item.q}
+              </AccordionTrigger>
+              <AccordionContent className="text-muted-foreground font-body leading-relaxed pb-4">
+                {item.a}
+              </AccordionContent>
+            </AccordionItem>
           ))}
-        </div>
+        </Accordion>
       </div>
     </section>
   );
