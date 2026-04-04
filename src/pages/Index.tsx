@@ -3,8 +3,9 @@ import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import DJsSection from "@/components/DJsSection";
-import ParallaxTicker from "@/components/ParallaxTicker";
+import TestimonialsSection from "@/components/TestimonialsSection";
 import RonaSection from "@/components/RonaSection";
+import ParallaxTicker from "@/components/ParallaxTicker";
 import ContactSection from "@/components/ContactSection";
 import FAQSection from "@/components/FAQSection";
 import Footer from "@/components/Footer";
@@ -23,8 +24,9 @@ const Index = () => {
       <HeroSection lang={lang} />
       <AboutSection lang={lang} />
       <DJsSection lang={lang} />
-      <ParallaxTicker />
+      <TestimonialsSection lang={lang} />
       <RonaSection lang={lang} />
+      <ParallaxTicker />
       <ContactSection lang={lang} />
       <FAQSection lang={lang} />
       <Footer lang={lang} onAccessibilityClick={() => setAccessibilityOpen(true)} />
@@ -35,4 +37,3 @@ const Index = () => {
 };
 
 export default Index;
-

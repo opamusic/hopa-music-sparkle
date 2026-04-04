@@ -12,12 +12,14 @@ const navLinks = {
   he: [
     { label: "About Us", href: "#about" },
     { label: "DJs", href: "#djs" },
+    { label: "Your Love", href: "#yourlove" },
     { label: "Rona", href: "#rona" },
     { label: "שאלות", href: "#faq" },
   ],
   en: [
     { label: "About Us", href: "#about" },
     { label: "DJs", href: "#djs" },
+    { label: "Your Love", href: "#yourlove" },
     { label: "Rona", href: "#rona" },
     { label: "FAQ", href: "#faq" },
   ],
@@ -38,6 +40,15 @@ const Header = ({ lang, onToggleLanguage }: HeaderProps) => {
     document.documentElement.lang = lang;
   }, [lang]);
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setMenuOpen(false);
+    const target = document.querySelector(href);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   const ctaLabel = lang === "he" ? "צור קשר" : "Contact Us";
   const languageLabel = lang === "he" ? "החלפת שפה" : "Switch language";
   const menuLabel = lang === "he" ? "פתיחת תפריט" : "Toggle menu";
@@ -49,7 +60,7 @@ const Header = ({ lang, onToggleLanguage }: HeaderProps) => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <a href="#hero">
+        <a href="#hero" onClick={(e) => handleNavClick(e, "#hero")}>
           <img
             src={scrolled ? logoBlack : logoWhite}
             alt="הופה מוזיקה"
@@ -63,6 +74,7 @@ const Header = ({ lang, onToggleLanguage }: HeaderProps) => {
             <a
               key={link.href}
               href={link.href}
+              onClick={(e) => handleNavClick(e, link.href)}
               className={`text-sm font-medium transition-colors duration-300 hover:text-primary ${
                 scrolled ? "text-foreground" : "text-primary-foreground"
               }`}
@@ -72,6 +84,7 @@ const Header = ({ lang, onToggleLanguage }: HeaderProps) => {
           ))}
           <a
             href="#contact"
+            onClick={(e) => handleNavClick(e, "#contact")}
             className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
               scrolled
                 ? "bg-primary text-primary-foreground hover:opacity-90"
@@ -122,7 +135,7 @@ const Header = ({ lang, onToggleLanguage }: HeaderProps) => {
               <a
                 key={link.href}
                 href={link.href}
-                onClick={() => setMenuOpen(false)}
+                onClick={(e) => handleNavClick(e, link.href)}
                 className="text-foreground text-lg font-medium hover:text-primary transition-colors"
               >
                 {link.label}
@@ -130,7 +143,7 @@ const Header = ({ lang, onToggleLanguage }: HeaderProps) => {
             ))}
             <a
               href="#contact"
-              onClick={() => setMenuOpen(false)}
+              onClick={(e) => handleNavClick(e, "#contact")}
               className="bg-primary text-primary-foreground px-5 py-3 rounded-full text-center font-medium mt-2"
             >
               {ctaLabel}
