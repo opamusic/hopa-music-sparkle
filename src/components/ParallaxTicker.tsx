@@ -57,46 +57,43 @@ const ParallaxTicker = () => {
 
   return (
     <div
+      aria-hidden="true"
       className="relative bg-background"
-      style={{ overflow: "visible", paddingTop: "2rem", paddingBottom: "2rem", pointerEvents: "none" }}
+      style={{ paddingTop: "2rem", paddingBottom: "2rem", pointerEvents: "none" }}
     >
-      {/* Strip 1 */}
-      <div
-        className="relative mb-3"
-        style={{
-          background: "hsl(0, 0%, 5%)",
-          transform: "rotate(-15deg) scale(1.54)",
-          transformOrigin: "center center",
-          marginLeft: "-80%",
-          marginRight: "-80%",
-        }}
-      >
+      <div className="relative overflow-hidden" style={{ height: "clamp(9rem, 24vw, 15rem)" }}>
         <div
-          ref={strip1Ref}
-          className="gap-4 md:gap-8 whitespace-nowrap flex items-center py-3 md:py-5"
-          style={{ width: "max-content", willChange: "transform" }}
+          className="absolute left-[-80%] right-[-80%] top-[18%]"
+          style={{
+            background: "hsl(var(--foreground))",
+            transform: "rotate(-15deg) scale(1.54)",
+            transformOrigin: "center center",
+          }}
         >
-          {renderLogos(200, ["pink", "white"])}
+          <div
+            ref={strip1Ref}
+            className="gap-4 md:gap-8 whitespace-nowrap flex items-center py-3 md:py-5"
+            style={{ width: "max-content", willChange: "transform" }}
+          >
+            {renderLogos(200, ["pink", "white"])}
+          </div>
         </div>
-      </div>
 
-      {/* Strip 2 */}
-      <div
-        className="relative"
-        style={{
-          background: "hsl(334, 100%, 55%)",
-          transform: "rotate(20deg) scale(1.54)",
-          transformOrigin: "center center",
-          marginLeft: "-80%",
-          marginRight: "-80%",
-        }}
-      >
         <div
-          ref={strip2Ref}
-          className="gap-4 md:gap-8 whitespace-nowrap flex items-center py-3 md:py-5"
-          style={{ width: "max-content", willChange: "transform" }}
+          className="absolute left-[-80%] right-[-80%] bottom-[18%]"
+          style={{
+            background: "hsl(var(--primary))",
+            transform: "rotate(20deg) scale(1.54)",
+            transformOrigin: "center center",
+          }}
         >
-          {renderLogos(200, ["pink", "white"])}
+          <div
+            ref={strip2Ref}
+            className="gap-4 md:gap-8 whitespace-nowrap flex items-center py-3 md:py-5"
+            style={{ width: "max-content", willChange: "transform" }}
+          >
+            {renderLogos(200, ["pink", "white"])}
+          </div>
         </div>
       </div>
     </div>
