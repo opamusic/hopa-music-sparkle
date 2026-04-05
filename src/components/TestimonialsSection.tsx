@@ -27,6 +27,7 @@ interface DismissedCard {
   side: "left" | "right";
   rotation: number;
   offsetY: number;
+  isPink: boolean;
 }
 
 interface SwipeCardProps {
@@ -34,9 +35,10 @@ interface SwipeCardProps {
   onSwipe: (dir: "left" | "right") => void;
   isTop: boolean;
   stackIndex: number;
+  isPink: boolean;
 }
 
-const SwipeCard = ({ text, onSwipe, isTop, stackIndex }: SwipeCardProps) => {
+const SwipeCard = ({ text, onSwipe, isTop, stackIndex, isPink }: SwipeCardProps) => {
   const x = useMotionValue(0);
   const rotate = useTransform(x, [-300, 0, 300], [-18, 0, 18]);
   const glowOpacity = useTransform(x, [-200, -80, 0, 80, 200], [0.7, 0.3, 0, 0.3, 0.7]);
@@ -60,11 +62,7 @@ const SwipeCard = ({ text, onSwipe, isTop, stackIndex }: SwipeCardProps) => {
         zIndex: 10 - stackIndex,
       }}
       initial={{ scale, y: yOffset, opacity: stackIndex > 2 ? 0 : 1 }}
-      animate={{
-        scale,
-        y: yOffset,
-        opacity: stackIndex > 2 ? 0 : 1,
-      }}
+      animate={{ scale, y: yOffset, opacity: stackIndex > 2 ? 0 : 1 }}
       exit={{
         x: x.get() > 0 ? 400 : -400,
         rotate: x.get() > 0 ? 25 : -25,
@@ -77,7 +75,6 @@ const SwipeCard = ({ text, onSwipe, isTop, stackIndex }: SwipeCardProps) => {
       onDragEnd={isTop ? handleDragEnd : undefined}
       transition={{ type: "spring", stiffness: 300, damping: 25 }}
     >
-      {/* Glow behind card on drag */}
       {isTop && (
         <motion.div
           className="absolute -inset-4 rounded-[2rem] pointer-events-none"
@@ -90,22 +87,26 @@ const SwipeCard = ({ text, onSwipe, isTop, stackIndex }: SwipeCardProps) => {
         />
       )}
 
-      {/* Glass card */}
       <div
         className="relative w-full h-full rounded-3xl p-8 md:p-10 flex items-center justify-center overflow-hidden"
         style={{
-          background: "rgba(255, 255, 255, 0.45)",
+          background: isPink
+            ? "rgba(195, 35, 105, 0.55)"
+            : "rgba(255, 255, 255, 0.45)",
           backdropFilter: "blur(15px)",
           WebkitBackdropFilter: "blur(15px)",
-          border: "1px solid rgba(255, 255, 255, 0.5)",
-          boxShadow:
-            "0 8px 32px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.6)",
+          border: isPink
+            ? "1px solid rgba(255, 255, 255, 0.25)"
+            : "1px solid rgba(255, 255, 255, 0.5)",
+          boxShadow: isPink
+            ? "0 8px 32px rgba(195, 35, 105, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.3)"
+            : "0 8px 32px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.6)",
         }}
       >
         <p
           className="text-lg md:text-2xl font-body font-semibold text-center leading-relaxed"
           dir="rtl"
-          style={{ color: "hsl(334, 60%, 20%)" }}
+          style={{ color: isPink ? "#ffffff" : "#c32369" }}
         >
           "{text}"
         </p>
@@ -127,6 +128,7 @@ const TestimonialsSection = ({ lang }: TestimonialsSectionProps) => {
         side: dir,
         rotation: (Math.random() - 0.5) * 30,
         offsetY: Math.random() * 60 - 30,
+        isPink: currentIndex % 2 === 1,
       };
       setDismissed((prev) => [...prev, card]);
       setCurrentIndex((prev) => prev + 1);
@@ -134,25 +136,26 @@ const TestimonialsSection = ({ lang }: TestimonialsSectionProps) => {
     [currentIndex],
   );
 
-  // Show up to 3 stacked cards
   const visibleCards = Array.from({ length: 3 }, (_, i) => {
-    const idx = (currentIndex + i) % testimonials.length;
-    return { text: testimonials[idx], key: currentIndex + i };
+    const globalIdx = currentIndex + i;
+    const idx = globalIdx % testimonials.length;
+    return { text: testimonials[idx], key: globalIdx, isPink: globalIdx % 2 === 1 };
   });
 
   return (
-    <section id="yourlove" className="section-padding bg-background relative overflow-hidden">
+    <section id="yourlove" className="py-14 md:py-20 px-6 md:px-12 lg:px-20 bg-background relative overflow-hidden">
       <div
         ref={ref}
         className={`max-w-3xl mx-auto transition-all duration-700 ${isVisible ? "animate-fade-up" : "opacity-0"}`}
       >
-        <h2 className="text-3xl md:text-4xl font-heading font-bold text-center mb-12">
-          Your Love
-        </h2>
+        <div className="text-center mb-12">
+          <h2 className="font-heading md:text-5xl text-foreground mb-2 text-4xl font-normal">
+            Your Love
+          </h2>
+          <div className="w-16 h-1 bg-primary mx-auto rounded-full" />
+        </div>
 
-        {/* Stack container */}
         <div className="relative w-full mx-auto" style={{ height: "280px", maxWidth: "440px" }}>
-          {/* Dismissed cards stuck on sides */}
           {dismissed.slice(-4).map((card) => (
             <motion.div
               key={card.id}
@@ -165,15 +168,14 @@ const TestimonialsSection = ({ lang }: TestimonialsSectionProps) => {
                 rotate: card.rotation,
               }}
               transition={{ type: "spring", stiffness: 150, damping: 20 }}
-              style={{
-                width: "100%",
-                height: "100%",
-              }}
+              style={{ width: "100%", height: "100%" }}
             >
               <div
                 className="w-full h-full rounded-3xl p-6 flex items-center justify-center"
                 style={{
-                  background: "rgba(255, 255, 255, 0.25)",
+                  background: card.isPink
+                    ? "rgba(195, 35, 105, 0.3)"
+                    : "rgba(255, 255, 255, 0.25)",
                   backdropFilter: "blur(8px)",
                   WebkitBackdropFilter: "blur(8px)",
                   border: "1px solid rgba(255, 255, 255, 0.3)",
@@ -182,7 +184,7 @@ const TestimonialsSection = ({ lang }: TestimonialsSectionProps) => {
                 <p
                   className="text-sm font-body text-center opacity-60"
                   dir="rtl"
-                  style={{ color: "hsl(334, 60%, 20%)" }}
+                  style={{ color: card.isPink ? "#ffffff" : "#c32369" }}
                 >
                   "{card.text}"
                 </p>
@@ -190,15 +192,10 @@ const TestimonialsSection = ({ lang }: TestimonialsSectionProps) => {
             </motion.div>
           ))}
 
-          {/* Floating animation wrapper */}
           <motion.div
             className="relative w-full h-full"
             animate={{ y: [0, -6, 0] }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
           >
             <AnimatePresence>
               {visibleCards
@@ -213,6 +210,7 @@ const TestimonialsSection = ({ lang }: TestimonialsSectionProps) => {
                       onSwipe={handleSwipe}
                       isTop={stackIndex === 0}
                       stackIndex={stackIndex}
+                      isPink={card.isPink}
                     />
                   );
                 })}
@@ -220,12 +218,10 @@ const TestimonialsSection = ({ lang }: TestimonialsSectionProps) => {
           </motion.div>
         </div>
 
-        {/* Swipe hint */}
         <p className="text-center text-muted-foreground text-sm mt-8 font-body">
           {lang === "he" ? "← החליקו לצדדים →" : "← Swipe →"}
         </p>
 
-        {/* Progress dots */}
         <div className="flex justify-center gap-2 mt-4">
           {testimonials.map((_, i) => (
             <div
