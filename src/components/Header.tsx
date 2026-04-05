@@ -45,7 +45,8 @@ const Header = ({ lang, onToggleLanguage }: HeaderProps) => {
     setMenuOpen(false);
     const target = document.querySelector(href);
     if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      const top = target.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top, behavior: "smooth" });
     }
   };
 

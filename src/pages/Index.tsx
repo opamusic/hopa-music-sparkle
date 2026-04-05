@@ -19,7 +19,7 @@ const Index = () => {
   const [accessibilityOpen, setAccessibilityOpen] = useState(false);
 
   return (
-    <div className="overflow-x-hidden">
+    <div style={{ overflowX: "clip" }}>
       <Header lang={lang} onToggleLanguage={() => setLang((prev) => (prev === "he" ? "en" : "he"))} />
       <HeroSection lang={lang} />
       <AboutSection lang={lang} />
