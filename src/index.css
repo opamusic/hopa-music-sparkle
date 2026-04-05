@@ -50,7 +50,7 @@
   }
 
   html {
-    scroll-behavior: smooth;
+    /* smooth scroll handled via JS to avoid scroll-lock bugs */
   }
 
   body {
