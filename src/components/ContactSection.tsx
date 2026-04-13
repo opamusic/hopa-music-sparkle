@@ -7,8 +7,8 @@ interface ContactSectionProps {
 }
 
 const djsByLang = {
-  he: ["ILAY ATTIAS", "ORI HOLLANDER", "ITAY ROZENGART", "עדיין לא בחרתי"],
-  en: ["ILAY ATTIAS", "ORI HOLLANDER", "ITAY ROZENGART", "Haven't decided yet"]
+  he: ["ILAY ATTIAS", "ORI HOLLANDER", "ITAY ROZENGART", "רונה | Rona", "עדיין לא בחרתי"],
+  en: ["ILAY ATTIAS", "ORI HOLLANDER", "ITAY ROZENGART", "Rona", "Haven't decided yet"]
 };
 
 const copy = {
