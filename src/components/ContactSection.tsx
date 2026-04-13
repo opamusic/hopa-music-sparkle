@@ -62,8 +62,8 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
       notes ? `📝 הערות: ${notes}` : "",
     ].filter(Boolean).join("\n");
 
-    const waUrl = `https://wa.me/972559899791?text=${encodeURIComponent(lines)}`;
-    window.open(waUrl, "_blank", "noopener,noreferrer");
+    const waUrl = `https://api.whatsapp.com/send?phone=972559899791&text=${encodeURIComponent(lines)}`;
+    window.location.href = waUrl;
     setSubmitted(true);
   };
 
