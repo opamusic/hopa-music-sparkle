@@ -106,7 +106,7 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
 
                 <button
                 type="submit"
-                className="w-full py-4 rounded-xl bg-primary text-primary-foreground font-heading font-semibold text-lg hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-lg">
+                className="w-full py-4 rounded-xl font-heading font-semibold text-lg hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-lg" style={{ background: "#c32369", color: "#fff" }}>
                 
                   {labels.submit}
                 </button>
