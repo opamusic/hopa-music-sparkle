@@ -122,6 +122,7 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
                 </select>
 
                 <textarea
+                name="notes"
                 placeholder={labels.notes}
                 rows={4}
                 className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all resize-none text-right" />
