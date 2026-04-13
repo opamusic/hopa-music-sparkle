@@ -88,6 +88,7 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
             <form onSubmit={handleSubmit} className="space-y-4">
                 <input
                 type="text"
+                name="fullName"
                 placeholder={labels.fullName}
                 required
                 className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all text-right" />
@@ -95,6 +96,7 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
 
                 <input
                 type="tel"
+                name="phone"
                 placeholder={labels.phone}
                 required
                 dir="ltr"
@@ -103,11 +105,13 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
 
                 <input
                 type="email"
+                name="email"
                 placeholder={labels.email}
                 className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all text-right" />
               
 
                 <select
+                name="dj"
                 className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all appearance-none text-right"
                 defaultValue="">
                 
