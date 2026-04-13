@@ -10,7 +10,7 @@ interface RonaSectionProps {
 const instrumentsByLang = {
   he: [
   { label: "סקסופון", icon: <Music className="w-8 h-8 md:w-12 md:h-12 text-primary" /> },
-  { label: "ג'מבה", icon: <Drum className="w-8 h-8 md:w-12 md:h-12 text-primary" /> },
+  { label: "דג'מבה", icon: <Drum className="w-8 h-8 md:w-12 md:h-12 text-primary" /> },
   { label: "גיטרה", icon: <Guitar className="w-8 h-8 md:w-12 md:h-12 text-primary" /> }],
 
   en: [
