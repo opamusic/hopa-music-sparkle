@@ -1,4 +1,4 @@
-const WHATSAPP_NUMBER = "972501234567"; // Replace with actual number
+const WHATSAPP_NUMBER = "972559899791";
 const MESSAGE = encodeURIComponent("היי, אשמח לשמוע פרטים נוספים על שירותי OPA 🎶");
 
 const WhatsAppButton = () => (

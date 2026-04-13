@@ -7,8 +7,8 @@ interface ContactSectionProps {
 }
 
 const djsByLang = {
-  he: ["ILAY ATTIAS", "ORI HOLLANDER", "ITAY ROZENGART", "עדיין לא בחרתי"],
-  en: ["ILAY ATTIAS", "ORI HOLLANDER", "ITAY ROZENGART", "Haven't decided yet"]
+  he: ["ILAY ATTIAS", "ORI HOLLANDER", "ITAY ROZENGART", "רונה | Rona", "עדיין לא בחרתי"],
+  en: ["ILAY ATTIAS", "ORI HOLLANDER", "ITAY ROZENGART", "Rona", "Haven't decided yet"]
 };
 
 const copy = {
@@ -45,6 +45,25 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+    const name = formData.get("fullName") as string || "";
+    const phone = formData.get("phone") as string || "";
+    const email = formData.get("email") as string || "";
+    const dj = formData.get("dj") as string || "";
+    const notes = formData.get("notes") as string || "";
+
+    const lines = [
+      `🎶 *ליד חדש מהאתר OPA* 🎶`,
+      `👤 שם: ${name}`,
+      `📞 טלפון: ${phone}`,
+      email ? `📧 אימייל: ${email}` : "",
+      dj ? `🎧 דיג׳יי: ${dj}` : "",
+      notes ? `📝 הערות: ${notes}` : "",
+    ].filter(Boolean).join("\n");
+
+    const waUrl = `https://wa.me/972559899791?text=${encodeURIComponent(lines)}`;
+    window.open(waUrl, "_blank", "noopener,noreferrer");
     setSubmitted(true);
   };
 
@@ -69,6 +88,7 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
             <form onSubmit={handleSubmit} className="space-y-4">
                 <input
                 type="text"
+                name="fullName"
                 placeholder={labels.fullName}
                 required
                 className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all text-right" />
@@ -76,6 +96,7 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
 
                 <input
                 type="tel"
+                name="phone"
                 placeholder={labels.phone}
                 required
                 dir="ltr"
@@ -84,11 +105,13 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
 
                 <input
                 type="email"
+                name="email"
                 placeholder={labels.email}
                 className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all text-right" />
               
 
                 <select
+                name="dj"
                 className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all appearance-none text-right"
                 defaultValue="">
                 
@@ -99,6 +122,7 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
                 </select>
 
                 <textarea
+                name="notes"
                 placeholder={labels.notes}
                 rows={4}
                 className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all resize-none text-right" />
