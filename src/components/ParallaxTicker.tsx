@@ -82,7 +82,7 @@ const ParallaxTicker = () => {
         <div
           className="absolute left-[-80%] right-[-80%] bottom-[18%]"
           style={{
-            background: "hsl(var(--primary))",
+            background: "#c32369",
             transform: "rotate(20deg) scale(1.54)",
             transformOrigin: "center center",
           }}

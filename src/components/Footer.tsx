@@ -19,7 +19,7 @@ const Footer = ({ lang, onAccessibilityClick }: FooterProps) => {
   };
 
   return (
-    <footer className="py-12 px-6 bg-primary">
+    <footer className="py-12 px-6" style={{ background: "#c32369" }}>
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         <img src={logoBlack} alt="OPA Music Group" className="h-8 opacity-60" />
 
