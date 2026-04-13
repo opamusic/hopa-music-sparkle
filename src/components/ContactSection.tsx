@@ -45,6 +45,25 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+    const name = formData.get("fullName") as string || "";
+    const phone = formData.get("phone") as string || "";
+    const email = formData.get("email") as string || "";
+    const dj = formData.get("dj") as string || "";
+    const notes = formData.get("notes") as string || "";
+
+    const lines = [
+      `🎶 *ליד חדש מהאתר OPA* 🎶`,
+      `👤 שם: ${name}`,
+      `📞 טלפון: ${phone}`,
+      email ? `📧 אימייל: ${email}` : "",
+      dj ? `🎧 דיג׳יי: ${dj}` : "",
+      notes ? `📝 הערות: ${notes}` : "",
+    ].filter(Boolean).join("\n");
+
+    const waUrl = `https://wa.me/972559899791?text=${encodeURIComponent(lines)}`;
+    window.open(waUrl, "_blank", "noopener,noreferrer");
     setSubmitted(true);
   };
 
