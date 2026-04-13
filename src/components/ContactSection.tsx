@@ -115,13 +115,13 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
           </div>
 
           <div className="md:col-span-2 flex flex-col justify-center gap-6">
-            <a href="tel:0501234567" className="flex items-center gap-3 text-foreground hover:text-primary transition-colors group">
+            <a href="tel:+972559899791" className="flex items-center gap-3 text-foreground hover:text-primary transition-colors group">
               <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center group-hover:bg-primary/10 transition-colors">
                 <Phone className="w-5 h-5" />
               </div>
               <div className="flex flex-col">
                 <span className="font-body text-sm text-muted-foreground">{lang === "he" ? "טלפון" : "Phone"}</span>
-                <span className="font-body text-lg" dir="ltr">‪+972 52‑205‑1273‬</span>
+                <span className="font-body text-lg" dir="ltr">‪+972 55-989-9791</span>
               </div>
             </a>
             <a href="mailto:info@opamusic.co.il" className="flex items-center gap-3 text-foreground hover:text-primary transition-colors group">
