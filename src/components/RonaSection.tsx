@@ -2,6 +2,7 @@ import { useScrollReveal } from "./useScrollReveal";
 import { Drum, Guitar, Music } from "lucide-react";
 import ronaLogo from "@/assets/rona-logo.png";
 import ronaBandPhoto from "@/assets/rona-band-photo.png";
+import ronaHero from "@/assets/rona-hero.png";
 
 interface RonaSectionProps {
   lang: "he" | "en";
@@ -35,7 +36,7 @@ const RonaSection = ({ lang }: RonaSectionProps) => {
           <img
 
             alt="RONA by OPA"
-            className="h-72 md:h-[28rem] mx-auto object-fill text-4xl -mb-8 md:-mb-14" src="/lovable-uploads/fc1b1626-f30e-4085-9798-2feb174ea71f.png" />
+            className="h-72 md:h-[28rem] mx-auto object-fill text-4xl -mb-8 md:-mb-14" src={ronaHero} />
           
         </div>
 
