@@ -79,59 +79,59 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
         <div className={`grid md:grid-cols-5 gap-10 transition-all duration-700 ${isVisible ? "animate-fade-up" : ""}`} style={{ animationDelay: "200ms" }}>
           <div className="md:col-span-3">
             {submitted ?
-            <div className="bg-secondary rounded-2xl p-12 text-center">
+              <div className="bg-secondary rounded-2xl p-12 text-center">
                 <div className="text-5xl mb-4">🎉</div>
                 <h3 className="font-heading text-2xl font-bold text-foreground mb-2">{labels.thankYou}</h3>
                 <p className="text-muted-foreground font-body">{labels.thankYouText}</p>
               </div> :
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <input
-                type="text"
-                name="fullName"
-                placeholder={labels.fullName}
-                required
-                className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all text-right" />
-              
+                  type="text"
+                  name="fullName"
+                  placeholder={labels.fullName}
+                  required
+                  className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all text-right" />
+
 
                 <input
-                type="tel"
-                name="phone"
-                placeholder={labels.phone}
-                required
-                dir="ltr"
-                className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all text-right" />
-              
+                  type="tel"
+                  name="phone"
+                  placeholder={labels.phone}
+                  required
+                  dir="ltr"
+                  className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all text-right" />
+
 
                 <input
-                type="email"
-                name="email"
-                placeholder={labels.email}
-                className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all text-right" />
-              
+                  type="email"
+                  name="email"
+                  placeholder={labels.email}
+                  className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all text-right" />
+
 
                 <select
-                name="dj"
-                className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all appearance-none text-right"
-                defaultValue="">
-                
+                  name="dj"
+                  className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all appearance-none text-right"
+                  defaultValue="">
+
                   <option value="" disabled>{labels.djSelect}</option>
                   {djsByLang[lang].map((dj) =>
-                <option key={dj} value={dj}>{dj}</option>
-                )}
+                    <option key={dj} value={dj}>{dj}</option>
+                  )}
                 </select>
 
                 <textarea
-                name="notes"
-                placeholder={labels.notes}
-                rows={4}
-                className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all resize-none text-right" />
-              
+                  name="notes"
+                  placeholder={labels.notes}
+                  rows={4}
+                  className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all resize-none text-right" />
+
 
                 <button
-                type="submit"
-                className="w-full py-4 rounded-xl font-heading font-semibold text-lg hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-lg" style={{ background: "#c32369", color: "#fff" }}>
-                
+                  type="submit"
+                  className="w-full py-4 rounded-xl font-heading font-semibold text-lg hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-lg" style={{ background: "#c32369", color: "#fff" }}>
+
                   {labels.submit}
                 </button>
               </form>
@@ -144,7 +144,6 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
                 <Phone className="w-5 h-5" />
               </div>
               <div className="flex flex-col">
-                <span className="font-body text-sm text-muted-foreground">{lang === "he" ? "טלפון" : "Phone"}</span>
                 <span className="font-body text-lg" dir="ltr">‪+972 55-989-9791</span>
               </div>
             </a>
@@ -153,9 +152,9 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
                 <Mail className="w-5 h-5" />
               </div>
               <span className="font-body text-lg">opadjs.il@gmail.com
-</span>
+              </span>
             </a>
-            <a href="#" className="flex items-center gap-3 text-foreground hover:text-primary transition-colors group">
+            <a href="https://www.instagram.com/opamusic.co.il/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-foreground hover:text-primary transition-colors group">
               <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center group-hover:bg-primary/10 transition-colors">
                 <Instagram className="w-5 h-5" />
               </div>

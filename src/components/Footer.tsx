@@ -24,7 +24,7 @@ const Footer = ({ lang, onAccessibilityClick }: FooterProps) => {
         <img src={logoBlack} alt="OPA Music Group" className="h-8 opacity-60" style={{ filter: "brightness(0) invert(1)" }} />
 
         <div className="flex items-center gap-5">
-          <a href="#" className="text-white/70 hover:text-white transition-colors" aria-label="Instagram">
+          <a href="https://www.instagram.com/opamusic.co.il/" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors" aria-label="Instagram">
             <Instagram className="w-5 h-5" />
           </a>
           <a href="#" className="text-white/70 hover:text-white transition-colors" aria-label="TikTok">
