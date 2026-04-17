@@ -27,8 +27,8 @@ const djs: DJ[] = [
       he: "אחרי עשור על העמדה, עילאי יודע בדיוק איך להדביק את כולם באנרגיה גבוהה ועריכות ייחודיות. הוא מייצר עבורכם מסיבה כזאת שכל האורחים ידברו עליה הרבה אחרי שהיא תיגמר.",
       en: "After a decade behind the decks, Ilay knows exactly how to get everyone hooked with high energy and unique edits. He creates the kind of party your guests will talk about long after it's over.",
     },
-    instagram: "#",
-    tiktok: "#",
+    instagram: "https://www.instagram.com/djilayattias?igsh=cDQzbDkxZ25hOHJr&utm_source=qr",
+    tiktok: "https://www.tiktok.com/@dj.ilay.attias?_r=1&_t=ZS-95cIPRVLyrZ",
   },
   {
     name: "ORI HOLLANDER",
@@ -37,8 +37,8 @@ const djs: DJ[] = [
       he: "עם רמיקסים בלעדיים ואנרגיה מטורפת, אורי כאן כדי להפוך את הרחבה שלכם למסיבה מטורפת שלא עוצרת. הוא מוודא שכל האורחים שלכם ירגישו את הטירוף הזה בכל רגע מחדש.",
       en: "With exclusive remixes and insane energy, Ori is here to turn your dancefloor into a non-stop party. He makes sure every guest feels the madness at every moment.",
     },
-    instagram: "#",
-    tiktok: "#",
+    instagram: "https://www.instagram.com/djhollander?igsh=bjM4bHF4MnRrNDdr&utm_source=qr",
+    tiktok: "https://www.tiktok.com/@dj_hollander?_r=1&_t=ZS-95bEbDMc9Cu",
   },
   {
     name: "ITAY ROZENGART",
@@ -47,8 +47,8 @@ const djs: DJ[] = [
       he: "איתי מגיע מעולם המועדונים ומביא את הוויב המדויק של הלילה ישר לחתונה שלכם. הוא יודע איך לייצר מסיבה מטורפת, כזו שגורמת לכל האורחים פשוט להיכנס לתוך המוזיקה וליהנות.",
       en: "Itay comes from the club scene and brings the exact nightlife vibe straight to your wedding. He knows how to create an insane party that pulls every guest into the music.",
     },
-    instagram: "#",
-    tiktok: "#",
+    instagram: "https://www.instagram.com/djrozy_?igsh=MTdsNzNydzZsdjE0",
+    tiktok: "https://www.tiktok.com/@dj.rozy6?_r=1&_t=ZS-95ah5dHX3TE",
   },
 ];
 
