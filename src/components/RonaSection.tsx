@@ -63,7 +63,7 @@ const RonaSection = ({ lang }: RonaSectionProps) => {
             </span>
             <span className="h-px w-8 md:w-12 bg-primary/40" aria-hidden />
           </div>
-          <p className="font-body text-base md:text-lg w-[400px] mx-auto leading-relaxed text-foreground/75">
+          <p className="font-body text-base md:text-lg max-w-full md:max-w-[400px] mx-auto leading-relaxed text-foreground/75">
             {renderIntro(lang)}
           </p>
         </div>
