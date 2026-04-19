@@ -12,33 +12,36 @@ interface TestimonialsSectionProps {
   lang: "he" | "en";
 }
 
-const testimonials = [
-  "וואי איזה ערב היה לנו, אנחנו עדיין לא נרגעים מהאווירהה",
-  "החלטה הכי טובה שלנו לסגור איתכם, הייתם פשוט מעל הציפיותת",
-  "באמת שהייתה אווירה מטורפת, לא הפסקנו לרקוד לרגעע",
-  "כולם לא מפסיקים לשאול מי היה הדיג׳יי, עשיתם לנו את האירועע",
-  "תקשיבו היה פשוט חלום, הכל זרם מושלםם",
-  "אין דברים כאלה בעולם, כולם היו בטירוף ברחבהה",
+interface Screenshot {
+  src: string;
+  alt: string;
+}
+
+const screenshots: Screenshot[] = [
+  { src: "https://picsum.photos/seed/opa-love-1/400/700", alt: "WhatsApp screenshot 1" },
+  { src: "https://picsum.photos/seed/opa-love-2/400/700", alt: "WhatsApp screenshot 2" },
+  { src: "https://picsum.photos/seed/opa-love-3/400/700", alt: "WhatsApp screenshot 3" },
+  { src: "https://picsum.photos/seed/opa-love-4/400/700", alt: "WhatsApp screenshot 4" },
+  { src: "https://picsum.photos/seed/opa-love-5/400/700", alt: "WhatsApp screenshot 5" },
+  { src: "https://picsum.photos/seed/opa-love-6/400/700", alt: "WhatsApp screenshot 6" },
 ];
 
 interface DismissedCard {
-  text: string;
+  screenshot: Screenshot;
   id: number;
   side: "left" | "right";
   rotation: number;
   offsetY: number;
-  isPink: boolean;
 }
 
 interface SwipeCardProps {
-  text: string;
+  screenshot: Screenshot;
   onSwipe: (dir: "left" | "right") => void;
   isTop: boolean;
   stackIndex: number;
-  isPink: boolean;
 }
 
-const SwipeCard = ({ text, onSwipe, isTop, stackIndex, isPink }: SwipeCardProps) => {
+const SwipeCard = ({ screenshot, onSwipe, isTop, stackIndex }: SwipeCardProps) => {
   const x = useMotionValue(0);
   const rotate = useTransform(x, [-300, 0, 300], [-18, 0, 18]);
   const glowOpacity = useTransform(x, [-200, -80, 0, 80, 200], [0.7, 0.3, 0, 0.3, 0.7]);
@@ -88,28 +91,22 @@ const SwipeCard = ({ text, onSwipe, isTop, stackIndex, isPink }: SwipeCardProps)
       )}
 
       <div
-        className="relative w-full h-full rounded-3xl p-8 md:p-10 flex items-center justify-center overflow-hidden"
+        className="relative w-full h-full rounded-3xl overflow-hidden p-2"
         style={{
-          background: isPink
-            ? "rgba(195, 35, 105, 0.55)"
-            : "rgba(255, 255, 255, 0.45)",
-          backdropFilter: "blur(15px)",
-          WebkitBackdropFilter: "blur(15px)",
-          border: isPink
-            ? "1px solid rgba(255, 255, 255, 0.25)"
-            : "1px solid rgba(255, 255, 255, 0.5)",
-          boxShadow: isPink
-            ? "0 8px 32px rgba(195, 35, 105, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.3)"
-            : "0 8px 32px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.6)",
+          background: "rgba(255, 255, 255, 0.35)",
+          backdropFilter: "blur(14px)",
+          WebkitBackdropFilter: "blur(14px)",
+          border: "1px solid rgba(255, 255, 255, 0.55)",
+          boxShadow:
+            "0 8px 32px rgba(0, 0, 0, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.6)",
         }}
       >
-        <p
-          className="text-lg md:text-2xl font-body font-semibold text-center leading-relaxed"
-          dir="rtl"
-          style={{ color: isPink ? "#ffffff" : "#c32369" }}
-        >
-          "{text}"
-        </p>
+        <img
+          src={screenshot.src}
+          alt={screenshot.alt}
+          draggable={false}
+          className="w-full h-full object-cover rounded-2xl bg-muted select-none pointer-events-none"
+        />
       </div>
     </motion.div>
   );
@@ -123,12 +120,11 @@ const TestimonialsSection = ({ lang }: TestimonialsSectionProps) => {
   const handleSwipe = useCallback(
     (dir: "left" | "right") => {
       const card: DismissedCard = {
-        text: testimonials[currentIndex % testimonials.length],
+        screenshot: screenshots[currentIndex % screenshots.length],
         id: currentIndex,
         side: dir,
         rotation: (Math.random() - 0.5) * 30,
         offsetY: Math.random() * 60 - 30,
-        isPink: currentIndex % 2 === 1,
       };
       setDismissed((prev) => [...prev, card]);
       setCurrentIndex((prev) => prev + 1);
@@ -138,24 +134,24 @@ const TestimonialsSection = ({ lang }: TestimonialsSectionProps) => {
 
   const visibleCards = Array.from({ length: 3 }, (_, i) => {
     const globalIdx = currentIndex + i;
-    const idx = globalIdx % testimonials.length;
-    return { text: testimonials[idx], key: globalIdx, isPink: globalIdx % 2 === 1 };
+    const idx = globalIdx % screenshots.length;
+    return { screenshot: screenshots[idx], key: globalIdx };
   });
 
   return (
-    <section id="yourlove" className="py-14 md:py-20 px-6 md:px-12 lg:px-20 bg-background relative overflow-hidden">
+    <section id="yourlove" className="pt-14 md:pt-20 pb-6 md:pb-8 px-6 md:px-12 lg:px-20 bg-background relative overflow-hidden">
       <div
         ref={ref}
         className={`max-w-3xl mx-auto transition-all duration-700 ${isVisible ? "animate-fade-up" : "opacity-0"}`}
       >
-        <div className="text-center mb-12">
+        <div className="text-center mb-10">
           <h2 className="font-heading md:text-5xl text-foreground mb-2 text-4xl font-normal">
             Your Love
           </h2>
           <div className="w-16 h-1 bg-primary mx-auto rounded-full" />
         </div>
 
-        <div className="relative w-full mx-auto" style={{ height: "280px", maxWidth: "440px" }}>
+        <div className="relative w-full mx-auto" style={{ height: "460px", maxWidth: "260px" }}>
           {dismissed.slice(-4).map((card) => (
             <motion.div
               key={card.id}
@@ -171,23 +167,20 @@ const TestimonialsSection = ({ lang }: TestimonialsSectionProps) => {
               style={{ width: "100%", height: "100%" }}
             >
               <div
-                className="w-full h-full rounded-3xl p-6 flex items-center justify-center"
+                className="w-full h-full rounded-3xl overflow-hidden p-2"
                 style={{
-                  background: card.isPink
-                    ? "rgba(195, 35, 105, 0.3)"
-                    : "rgba(255, 255, 255, 0.25)",
+                  background: "rgba(255, 255, 255, 0.25)",
                   backdropFilter: "blur(8px)",
                   WebkitBackdropFilter: "blur(8px)",
-                  border: "1px solid rgba(255, 255, 255, 0.3)",
+                  border: "1px solid rgba(255, 255, 255, 0.4)",
                 }}
               >
-                <p
-                  className="text-sm font-body text-center opacity-60"
-                  dir="rtl"
-                  style={{ color: card.isPink ? "#ffffff" : "#c32369" }}
-                >
-                  "{card.text}"
-                </p>
+                <img
+                  src={card.screenshot.src}
+                  alt=""
+                  aria-hidden
+                  className="w-full h-full object-cover rounded-2xl bg-muted opacity-80"
+                />
               </div>
             </motion.div>
           ))}
@@ -206,11 +199,10 @@ const TestimonialsSection = ({ lang }: TestimonialsSectionProps) => {
                   return (
                     <SwipeCard
                       key={card.key}
-                      text={card.text}
+                      screenshot={card.screenshot}
                       onSwipe={handleSwipe}
                       isTop={stackIndex === 0}
                       stackIndex={stackIndex}
-                      isPink={card.isPink}
                     />
                   );
                 })}
@@ -223,17 +215,17 @@ const TestimonialsSection = ({ lang }: TestimonialsSectionProps) => {
         </p>
 
         <div className="flex justify-center gap-2 mt-4">
-          {testimonials.map((_, i) => (
+          {screenshots.map((_, i) => (
             <div
               key={i}
               className="w-2 h-2 rounded-full transition-all duration-300"
               style={{
                 background:
-                  currentIndex % testimonials.length === i
+                  currentIndex % screenshots.length === i
                     ? "#c32369"
                     : "hsl(var(--muted))",
                 transform:
-                  currentIndex % testimonials.length === i
+                  currentIndex % screenshots.length === i
                     ? "scale(1.3)"
                     : "scale(1)",
               }}

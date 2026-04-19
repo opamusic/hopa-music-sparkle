@@ -66,6 +66,7 @@ const DJsSection = ({ lang }: DJsSectionProps) => {
   const { ref, isVisible } = useScrollReveal();
   const [selectedDJ, setSelectedDJ] = useState<DJ | null>(null);
   const sectionTitle = "Our DJ's";
+  const tapHint = lang === "he" ? "לחצו על התמונה כדי להכיר את הדי-ג׳יי שלכם" : "Tap a photo to meet your DJ";
   const aboutLabel = lang === "he" ? "קצת על הדיג'יי" : "About the DJ";
   const closeLabel = lang === "he" ? "סגירה" : "Close";
 
@@ -76,6 +77,7 @@ const DJsSection = ({ lang }: DJsSectionProps) => {
           <div className={`text-center mb-14 transition-all duration-700 ${isVisible ? "animate-fade-up" : ""}`}>
             <h2 className="font-heading md:text-5xl text-foreground mb-2 text-4xl font-normal">{sectionTitle}</h2>
             <div className="w-16 h-1 bg-primary mx-auto rounded-full" />
+            <p className="font-body text-sm md:text-base text-muted-foreground mt-4 text-center">{tapHint}</p>
           </div>
 
           {/* Desktop: standard grid */}
