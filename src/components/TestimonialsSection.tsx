@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import {
   motion,
   useMotionValue,
@@ -7,6 +7,18 @@ import {
   PanInfo,
 } from "framer-motion";
 import { useScrollReveal } from "./useScrollReveal";
+import whatsappIlay1 from "@/assets/whatsapp/whatsapp-ilay-1.jpeg";
+import whatsappIlay2 from "@/assets/whatsapp/whatsapp-ilay-2.jpeg";
+import whatsappIlay3 from "@/assets/whatsapp/whatsapp-ilay-3.jpeg";
+import whatsappIlay4 from "@/assets/whatsapp/whatsapp-ilay-4.jpeg";
+import whatsappIlay5 from "@/assets/whatsapp/whatsapp-ilay-5.jpeg";
+import whatsappIlay6 from "@/assets/whatsapp/whatsapp-ilay-6.jpg";
+import whatsappOri1 from "@/assets/whatsapp/whatsapp-ori-1.jpeg";
+import whatsappOri2 from "@/assets/whatsapp/whatsapp-ori-2.jpeg";
+import whatsappOri3 from "@/assets/whatsapp/whatsapp-ori-3.jpeg";
+import whatsappOri4 from "@/assets/whatsapp/whatsapp-ori-4.jpeg";
+import whatsappHollander1 from "@/assets/whatsapp/whatsapp-hollander-1.jpeg";
+import whatsappHollander2 from "@/assets/whatsapp/whatsapp-hollander-2.jpeg";
 
 interface TestimonialsSectionProps {
   lang: "he" | "en";
@@ -18,13 +30,21 @@ interface Screenshot {
 }
 
 const screenshots: Screenshot[] = [
-  { src: "https://picsum.photos/seed/opa-love-1/400/700", alt: "WhatsApp screenshot 1" },
-  { src: "https://picsum.photos/seed/opa-love-2/400/700", alt: "WhatsApp screenshot 2" },
-  { src: "https://picsum.photos/seed/opa-love-3/400/700", alt: "WhatsApp screenshot 3" },
-  { src: "https://picsum.photos/seed/opa-love-4/400/700", alt: "WhatsApp screenshot 4" },
-  { src: "https://picsum.photos/seed/opa-love-5/400/700", alt: "WhatsApp screenshot 5" },
-  { src: "https://picsum.photos/seed/opa-love-6/400/700", alt: "WhatsApp screenshot 6" },
+  { src: whatsappIlay1, alt: "WhatsApp screenshot from Ilay 1" },
+  { src: whatsappOri1, alt: "WhatsApp screenshot from Ori 1" },
+  { src: whatsappHollander1, alt: "WhatsApp screenshot from Hollander 1" },
+  { src: whatsappIlay2, alt: "WhatsApp screenshot from Ilay 2" },
+  { src: whatsappOri2, alt: "WhatsApp screenshot from Ori 2" },
+  { src: whatsappHollander2, alt: "WhatsApp screenshot from Hollander 2" },
+  { src: whatsappIlay3, alt: "WhatsApp screenshot from Ilay 3" },
+  { src: whatsappOri3, alt: "WhatsApp screenshot from Ori 3" },
+  { src: whatsappIlay4, alt: "WhatsApp screenshot from Ilay 4" },
+  { src: whatsappOri4, alt: "WhatsApp screenshot from Ori 4" },
+  { src: whatsappIlay5, alt: "WhatsApp screenshot from Ilay 5" },
+  { src: whatsappIlay6, alt: "WhatsApp screenshot from Ilay 6" },
 ];
+
+const DEFAULT_ASPECT_RATIO = 9 / 19.5;
 
 interface DismissedCard {
   screenshot: Screenshot;
@@ -39,9 +59,10 @@ interface SwipeCardProps {
   onSwipe: (dir: "left" | "right") => void;
   isTop: boolean;
   stackIndex: number;
+  aspectRatio: number;
 }
 
-const SwipeCard = ({ screenshot, onSwipe, isTop, stackIndex }: SwipeCardProps) => {
+const SwipeCard = ({ screenshot, onSwipe, isTop, stackIndex, aspectRatio }: SwipeCardProps) => {
   const x = useMotionValue(0);
   const rotate = useTransform(x, [-300, 0, 300], [-18, 0, 18]);
   const glowOpacity = useTransform(x, [-200, -80, 0, 80, 200], [0.7, 0.3, 0, 0.3, 0.7]);
@@ -55,17 +76,21 @@ const SwipeCard = ({ screenshot, onSwipe, isTop, stackIndex }: SwipeCardProps) =
 
   const scale = 1 - stackIndex * 0.04;
   const yOffset = stackIndex * 10;
+  const stackOpacity = stackIndex === 0 ? 1 : stackIndex === 1 ? 0.5 : stackIndex === 2 ? 0.25 : 0;
 
   return (
     <motion.div
-      className="absolute inset-0 cursor-grab active:cursor-grabbing touch-none"
+      className="cursor-grab active:cursor-grabbing touch-none"
       style={{
+        gridArea: "1 / 1",
+        width: "100%",
+        aspectRatio,
         x: isTop ? x : 0,
         rotate: isTop ? rotate : 0,
         zIndex: 10 - stackIndex,
       }}
-      initial={{ scale, y: yOffset, opacity: stackIndex > 2 ? 0 : 1 }}
-      animate={{ scale, y: yOffset, opacity: stackIndex > 2 ? 0 : 1 }}
+      initial={{ scale, y: yOffset, opacity: stackOpacity }}
+      animate={{ scale, y: yOffset, opacity: stackOpacity }}
       exit={{
         x: x.get() > 0 ? 400 : -400,
         rotate: x.get() > 0 ? 25 : -25,
@@ -116,6 +141,19 @@ const TestimonialsSection = ({ lang }: TestimonialsSectionProps) => {
   const { ref, isVisible } = useScrollReveal();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [dismissed, setDismissed] = useState<DismissedCard[]>([]);
+  const [aspectRatios, setAspectRatios] = useState<Record<string, number>>({});
+
+  useEffect(() => {
+    screenshots.forEach((s) => {
+      const img = new Image();
+      img.onload = () => {
+        setAspectRatios((prev) =>
+          prev[s.src] ? prev : { ...prev, [s.src]: img.naturalWidth / img.naturalHeight },
+        );
+      };
+      img.src = s.src;
+    });
+  }, []);
 
   const handleSwipe = useCallback(
     (dir: "left" | "right") => {
@@ -138,6 +176,12 @@ const TestimonialsSection = ({ lang }: TestimonialsSectionProps) => {
     return { screenshot: screenshots[idx], key: globalIdx };
   });
 
+  const loadedRatios = Object.values(aspectRatios);
+  const tallestAspectRatio =
+    loadedRatios.length === screenshots.length
+      ? Math.min(...loadedRatios)
+      : DEFAULT_ASPECT_RATIO;
+
   return (
     <section id="yourlove" className="pt-14 md:pt-20 pb-6 md:pb-8 px-6 md:px-12 lg:px-20 bg-background relative overflow-hidden">
       <div
@@ -151,42 +195,51 @@ const TestimonialsSection = ({ lang }: TestimonialsSectionProps) => {
           <div className="w-16 h-1 bg-primary mx-auto rounded-full" />
         </div>
 
-        <div className="relative w-full mx-auto" style={{ height: "460px", maxWidth: "260px" }}>
-          {dismissed.slice(-4).map((card) => (
-            <motion.div
-              key={card.id}
-              className="absolute top-0 pointer-events-none"
-              initial={{ opacity: 0 }}
-              animate={{
-                opacity: 0.5,
-                x: card.side === "right" ? "calc(100% + 16px)" : "calc(-100% - 16px)",
-                y: card.offsetY,
-                rotate: card.rotation,
-              }}
-              transition={{ type: "spring", stiffness: 150, damping: 20 }}
-              style={{ width: "100%", height: "100%" }}
-            >
+        <div
+          className="relative w-full mx-auto"
+          style={{ maxWidth: "260px", aspectRatio: tallestAspectRatio }}
+        >
+          {dismissed.slice(-4).map((card) => {
+            const cardRatio = aspectRatios[card.screenshot.src] ?? DEFAULT_ASPECT_RATIO;
+            return (
               <div
-                className="w-full h-full rounded-3xl overflow-hidden p-2"
-                style={{
-                  background: "rgba(255, 255, 255, 0.25)",
-                  backdropFilter: "blur(8px)",
-                  WebkitBackdropFilter: "blur(8px)",
-                  border: "1px solid rgba(255, 255, 255, 0.4)",
-                }}
+                key={card.id}
+                className="absolute inset-0 grid place-items-center pointer-events-none"
               >
-                <img
-                  src={card.screenshot.src}
-                  alt=""
-                  aria-hidden
-                  className="w-full h-full object-cover rounded-2xl bg-muted opacity-80"
-                />
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity: 0.5,
+                    x: card.side === "right" ? "calc(100% + 16px)" : "calc(-100% - 16px)",
+                    y: card.offsetY,
+                    rotate: card.rotation,
+                  }}
+                  transition={{ type: "spring", stiffness: 150, damping: 20 }}
+                  style={{ width: "100%", aspectRatio: cardRatio }}
+                >
+                  <div
+                    className="w-full h-full rounded-3xl overflow-hidden p-2"
+                    style={{
+                      background: "rgba(255, 255, 255, 0.25)",
+                      backdropFilter: "blur(8px)",
+                      WebkitBackdropFilter: "blur(8px)",
+                      border: "1px solid rgba(255, 255, 255, 0.4)",
+                    }}
+                  >
+                    <img
+                      src={card.screenshot.src}
+                      alt=""
+                      aria-hidden
+                      className="w-full h-full object-cover rounded-2xl bg-muted opacity-80"
+                    />
+                  </div>
+                </motion.div>
               </div>
-            </motion.div>
-          ))}
+            );
+          })}
 
           <motion.div
-            className="relative w-full h-full"
+            className="absolute inset-0 grid place-items-center"
             animate={{ y: [0, -6, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
           >
@@ -196,6 +249,8 @@ const TestimonialsSection = ({ lang }: TestimonialsSectionProps) => {
                 .reverse()
                 .map((card, reverseIdx) => {
                   const stackIndex = 2 - reverseIdx;
+                  const cardRatio =
+                    aspectRatios[card.screenshot.src] ?? DEFAULT_ASPECT_RATIO;
                   return (
                     <SwipeCard
                       key={card.key}
@@ -203,6 +258,7 @@ const TestimonialsSection = ({ lang }: TestimonialsSectionProps) => {
                       onSwipe={handleSwipe}
                       isTop={stackIndex === 0}
                       stackIndex={stackIndex}
+                      aspectRatio={cardRatio}
                     />
                   );
                 })}
