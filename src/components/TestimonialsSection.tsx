@@ -5,7 +5,9 @@ import {
   useTransform,
   AnimatePresence,
   PanInfo,
+  useReducedMotion,
 } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useScrollReveal } from "./useScrollReveal";
 import whatsappIlay1 from "@/assets/whatsapp/whatsapp-ilay-1.jpeg";
 import whatsappIlay2 from "@/assets/whatsapp/whatsapp-ilay-2.jpeg";
@@ -142,6 +144,7 @@ const TestimonialsSection = ({ lang }: TestimonialsSectionProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [dismissed, setDismissed] = useState<DismissedCard[]>([]);
   const [aspectRatios, setAspectRatios] = useState<Record<string, number>>({});
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     screenshots.forEach((s) => {
@@ -182,23 +185,48 @@ const TestimonialsSection = ({ lang }: TestimonialsSectionProps) => {
       ? Math.min(...loadedRatios)
       : DEFAULT_ASPECT_RATIO;
 
+  const sectionLabel = lang === "he" ? "המלצות לקוחות" : "Customer testimonials";
+  const prevLabel = lang === "he" ? "המלצה קודמת" : "Previous testimonial";
+  const nextLabel = lang === "he" ? "המלצה הבאה" : "Next testimonial";
+  const positionLabel = (idx: number) =>
+    lang === "he" ? `תמונה ${idx + 1} מתוך ${screenshots.length}` : `Image ${idx + 1} of ${screenshots.length}`;
+  const currentDisplayIdx = currentIndex % screenshots.length;
+
   return (
-    <section id="yourlove" className="pt-14 md:pt-20 pb-6 md:pb-8 px-6 md:px-12 lg:px-20 bg-background relative overflow-hidden">
+    <section
+      id="yourlove"
+      className="pt-14 md:pt-20 pb-6 md:pb-8 px-6 md:px-12 lg:px-20 bg-background relative overflow-hidden"
+      aria-label={sectionLabel}
+    >
       <div
         ref={ref}
         className={`max-w-3xl mx-auto transition-all duration-700 ${isVisible ? "animate-fade-up" : "opacity-0"}`}
       >
         <div className="text-center mb-10">
-          <h2 className="font-heading md:text-5xl text-foreground mb-2 text-4xl font-normal">
+          <h2 lang="en" className="font-heading md:text-5xl text-foreground mb-2 text-4xl font-normal">
             Your Love
           </h2>
           <div className="w-16 h-1 bg-primary mx-auto rounded-full" />
         </div>
 
         <div
-          className="relative w-full mx-auto"
+          role="region"
+          aria-roledescription={lang === "he" ? "קרוסלת המלצות" : "testimonial carousel"}
+          aria-label={sectionLabel}
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "ArrowLeft") {
+              e.preventDefault();
+              handleSwipe(lang === "he" ? "right" : "left");
+            } else if (e.key === "ArrowRight") {
+              e.preventDefault();
+              handleSwipe(lang === "he" ? "left" : "right");
+            }
+          }}
+          className="relative w-full mx-auto rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-background"
           style={{ maxWidth: "260px", aspectRatio: tallestAspectRatio }}
         >
+          <span className="sr-only-a11y" aria-live="polite">{positionLabel(currentDisplayIdx)}</span>
           {dismissed.slice(-4).map((card) => {
             const cardRatio = aspectRatios[card.screenshot.src] ?? DEFAULT_ASPECT_RATIO;
             return (
@@ -240,8 +268,8 @@ const TestimonialsSection = ({ lang }: TestimonialsSectionProps) => {
 
           <motion.div
             className="absolute inset-0 grid place-items-center"
-            animate={{ y: [0, -6, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            animate={reducedMotion ? { y: 0 } : { y: [0, -6, 0] }}
+            transition={reducedMotion ? { duration: 0 } : { duration: 4, repeat: Infinity, ease: "easeInOut" }}
           >
             <AnimatePresence>
               {visibleCards
@@ -267,10 +295,37 @@ const TestimonialsSection = ({ lang }: TestimonialsSectionProps) => {
         </div>
 
         <p className="text-center text-muted-foreground text-sm mt-8 font-body">
-          {lang === "he" ? "← החליקו לצדדים →" : "← Swipe →"}
+          {lang === "he" ? "← החליקו לצדדים או השתמשו בחיצים →" : "← Swipe or use arrow keys →"}
         </p>
 
-        <div className="flex justify-center gap-2 mt-4">
+        <div className="flex justify-center items-center gap-3 mt-4">
+          <button
+            type="button"
+            onClick={() => handleSwipe(lang === "he" ? "right" : "left")}
+            aria-label={prevLabel}
+            className="w-10 h-10 rounded-full bg-muted hover:bg-muted/70 flex items-center justify-center transition-colors"
+          >
+            {lang === "he" ? (
+              <ChevronRight className="w-5 h-5" aria-hidden="true" />
+            ) : (
+              <ChevronLeft className="w-5 h-5" aria-hidden="true" />
+            )}
+          </button>
+          <button
+            type="button"
+            onClick={() => handleSwipe(lang === "he" ? "left" : "right")}
+            aria-label={nextLabel}
+            className="w-10 h-10 rounded-full bg-muted hover:bg-muted/70 flex items-center justify-center transition-colors"
+          >
+            {lang === "he" ? (
+              <ChevronLeft className="w-5 h-5" aria-hidden="true" />
+            ) : (
+              <ChevronRight className="w-5 h-5" aria-hidden="true" />
+            )}
+          </button>
+        </div>
+
+        <div className="flex justify-center gap-2 mt-4" aria-hidden="true">
           {screenshots.map((_, i) => (
             <div
               key={i}

@@ -71,7 +71,7 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
     <section id="contact" className="section-padding bg-primary-foreground">
       <div ref={ref} className="text-center">
         <div className={`text-center mb-14 transition-all duration-700 ${isVisible ? "animate-fade-up" : ""}`}>
-          <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-2">{labels.title}</h2>
+          <h2 id="contact-title" className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-2">{labels.title}</h2>
           <p className="text-muted-foreground text-lg font-body">{labels.subtitle}</p>
           <div className="w-16 h-1 bg-primary mx-auto rounded-full mt-4" />
         </div>
@@ -85,48 +85,95 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
                 <p className="text-muted-foreground font-body">{labels.thankYouText}</p>
               </div> :
 
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <input
-                  type="text"
-                  name="fullName"
-                  placeholder={labels.fullName}
-                  required
-                  className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all text-right" />
+              <form onSubmit={handleSubmit} className="space-y-4" aria-labelledby="contact-title">
+                <div className="text-right">
+                  <label
+                    htmlFor="contact-fullName"
+                    className="block font-body text-sm font-medium text-foreground mb-1.5"
+                  >
+                    {labels.fullName}
+                    <span aria-hidden="true" className="text-primary"> *</span>
+                  </label>
+                  <input
+                    id="contact-fullName"
+                    type="text"
+                    name="fullName"
+                    placeholder={labels.fullName}
+                    required
+                    aria-required="true"
+                    className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all text-right" />
+                </div>
 
+                <div className="text-right">
+                  <label
+                    htmlFor="contact-phone"
+                    className="block font-body text-sm font-medium text-foreground mb-1.5"
+                  >
+                    {labels.phone}
+                    <span aria-hidden="true" className="text-primary"> *</span>
+                  </label>
+                  <input
+                    id="contact-phone"
+                    type="tel"
+                    name="phone"
+                    placeholder={labels.phone}
+                    required
+                    aria-required="true"
+                    autoComplete="tel"
+                    dir="ltr"
+                    className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all text-right" />
+                </div>
 
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder={labels.phone}
-                  required
-                  dir="ltr"
-                  className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all text-right" />
+                <div className="text-right">
+                  <label
+                    htmlFor="contact-email"
+                    className="block font-body text-sm font-medium text-foreground mb-1.5"
+                  >
+                    {labels.email}
+                  </label>
+                  <input
+                    id="contact-email"
+                    type="email"
+                    name="email"
+                    placeholder={labels.email}
+                    autoComplete="email"
+                    className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all text-right" />
+                </div>
 
+                <div className="text-right">
+                  <label
+                    htmlFor="contact-dj"
+                    className="block font-body text-sm font-medium text-foreground mb-1.5"
+                  >
+                    {labels.djSelect}
+                  </label>
+                  <select
+                    id="contact-dj"
+                    name="dj"
+                    className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all appearance-none text-right"
+                    defaultValue="">
 
-                <input
-                  type="email"
-                  name="email"
-                  placeholder={labels.email}
-                  className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all text-right" />
+                    <option value="" disabled>{labels.djSelect}</option>
+                    {djsByLang[lang].map((dj) =>
+                      <option key={dj} value={dj}>{dj}</option>
+                    )}
+                  </select>
+                </div>
 
-
-                <select
-                  name="dj"
-                  className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all appearance-none text-right"
-                  defaultValue="">
-
-                  <option value="" disabled>{labels.djSelect}</option>
-                  {djsByLang[lang].map((dj) =>
-                    <option key={dj} value={dj}>{dj}</option>
-                  )}
-                </select>
-
-                <textarea
-                  name="notes"
-                  placeholder={labels.notes}
-                  rows={4}
-                  className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all resize-none text-right" />
-
+                <div className="text-right">
+                  <label
+                    htmlFor="contact-notes"
+                    className="block font-body text-sm font-medium text-foreground mb-1.5"
+                  >
+                    {labels.notes}
+                  </label>
+                  <textarea
+                    id="contact-notes"
+                    name="notes"
+                    placeholder={labels.notes}
+                    rows={4}
+                    className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all resize-none text-right" />
+                </div>
 
                 <button
                   type="submit"
@@ -139,7 +186,7 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
           </div>
 
           <div className="md:col-span-2 flex flex-col justify-center gap-6">
-            <a href="tel:+972559899791" className="flex items-center gap-3 text-foreground hover:text-primary transition-colors group">
+            <a href="tel:+972559899791" aria-label={lang === "he" ? "חיוג למספר 055-989-9791" : "Call +972 55-989-9791"} className="flex items-center gap-3 text-foreground hover:text-primary transition-colors group">
               <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center group-hover:bg-primary/10 transition-colors">
                 <Phone className="w-5 h-5" />
               </div>
@@ -147,14 +194,14 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
                 <span className="font-body text-lg" dir="ltr">‪+972 55-989-9791</span>
               </div>
             </a>
-            <a href="mailto:info@opamusic.co.il" className="flex items-center gap-3 text-foreground hover:text-primary transition-colors group">
+            <a href="mailto:info@opamusic.co.il" aria-label={lang === "he" ? "שליחת אימייל ל-info@opamusic.co.il" : "Email info@opamusic.co.il"} className="flex items-center gap-3 text-foreground hover:text-primary transition-colors group">
               <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center group-hover:bg-primary/10 transition-colors">
                 <Mail className="w-5 h-5" />
               </div>
               <span className="font-body text-lg">opadjs.il@gmail.com
               </span>
             </a>
-            <a href="https://www.instagram.com/opamusic.co.il/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-foreground hover:text-primary transition-colors group">
+            <a href="https://www.instagram.com/opamusic.co.il/" target="_blank" rel="noopener noreferrer" aria-label={lang === "he" ? "הפרופיל שלנו באינסטגרם — נפתח בכרטיסייה חדשה" : "Our Instagram profile — opens in new tab"} className="flex items-center gap-3 text-foreground hover:text-primary transition-colors group">
               <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center group-hover:bg-primary/10 transition-colors">
                 <Instagram className="w-5 h-5" />
               </div>

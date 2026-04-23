@@ -10,7 +10,10 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
   const imageAlt = lang === "he" ? "הופה מוזיקה - צוות דיג׳ייז" : "OPA Music Group DJ crew";
 
   return (
-    <section id="hero" className="relative h-screen overflow-hidden">
+    <section id="hero" className="relative h-screen overflow-hidden" aria-labelledby="hero-title">
+      <h1 id="hero-title" className="sr-only-a11y">
+        {lang === "he" ? "OPA Music Group — צוות הדיג'ייז המוביל לאירועים" : "OPA Music Group — Leading DJ crew for events"}
+      </h1>
       {/* Mobile hero */}
       <img
         src={heroImage}
@@ -34,7 +37,7 @@ const HeroSection = ({ lang }: HeroSectionProps) => {
       <div className="absolute bottom-[20%] left-0 right-0 z-10 flex justify-center px-6">
         <a
           href="#contact"
-          className="px-10 py-3 bg-white/70 text-black font-medium text-base rounded-[4px] shadow-md hover:bg-white/85 hover:shadow-lg hover:scale-105 transition-all duration-300 backdrop-blur-sm">
+          className="px-10 py-3 bg-white text-black font-medium text-base rounded-[4px] shadow-md hover:bg-white/95 hover:shadow-lg hover:scale-105 transition-all duration-300">
           {ctaLabel}
         </a>
       </div>

@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { useScrollReveal } from "./useScrollReveal";
-import { X, Instagram } from "lucide-react";
+import { Instagram } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import dj1 from "@/assets/dj1.jpg";
 import dj2 from "@/assets/dj2.jpg";
 import dj3 from "@/assets/dj3.jpg";
@@ -68,14 +74,13 @@ const DJsSection = ({ lang }: DJsSectionProps) => {
   const sectionTitle = "Our DJ's";
   const tapHint = lang === "he" ? "לחצו על התמונה כדי להכיר את הדי-ג׳יי שלכם" : "Tap a photo to meet your DJ";
   const aboutLabel = lang === "he" ? "קצת על הדיג'יי" : "About the DJ";
-  const closeLabel = lang === "he" ? "סגירה" : "Close";
 
   return (
     <>
       <section id="djs" className="section-padding bg-muted/30">
         <div ref={ref} className={`max-w-6xl mx-auto ${isVisible ? "" : "opacity-0"}`}>
           <div className={`text-center mb-14 transition-all duration-700 ${isVisible ? "animate-fade-up" : ""}`}>
-            <h2 className="font-heading md:text-5xl text-foreground mb-2 text-4xl font-normal">{sectionTitle}</h2>
+            <h2 lang="en" className="font-heading md:text-5xl text-foreground mb-2 text-4xl font-normal">{sectionTitle}</h2>
             <div className="w-16 h-1 bg-primary mx-auto rounded-full" />
             <p className="font-body text-sm md:text-base text-muted-foreground mt-4 text-center">{tapHint}</p>
           </div>
@@ -116,59 +121,68 @@ const DJsSection = ({ lang }: DJsSectionProps) => {
         </div>
       </section>
 
-      {/* DJ Modal */}
-      {selectedDJ && (
-        <div
-          className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-fade-in"
-          onClick={() => setSelectedDJ(null)}
+      {/* DJ Modal — Radix Dialog provides focus trap, Escape-to-close, role=dialog */}
+      <Dialog open={!!selectedDJ} onOpenChange={(v) => !v && setSelectedDJ(null)}>
+        <DialogContent
+          dir={lang === "he" ? "rtl" : "ltr"}
+          className="max-w-lg w-full overflow-hidden p-0 bg-card rounded-3xl border-none"
+          style={{ boxShadow: "0 25px 60px -12px rgba(0,0,0,0.4)" }}
         >
-          <div
-            className="bg-card rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl animate-scale-in"
-            style={{ boxShadow: "0 25px 60px -12px rgba(0,0,0,0.4)" }}
-            onClick={(e) => e.stopPropagation()}
-          >
+          {selectedDJ && (
             <div className="relative">
               <img
                 src={selectedDJ.image}
                 alt={selectedDJ.name}
                 className="w-full aspect-[3/4] object-cover object-top"
               />
-              {/* Stronger bottom gradient fade for readability */}
               <div
                 className="absolute inset-0 bg-gradient-to-t from-card from-20% via-card/80 via-45% to-transparent"
                 style={{ top: "25%" }}
               />
-              <button
-                onClick={() => setSelectedDJ(null)}
-                className="absolute top-4 left-4 w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-white/90 transition-colors"
-                aria-label={closeLabel}
-              >
-                <X className="w-5 h-5 text-foreground" />
-              </button>
 
-              {/* Overlaid content on faded area */}
               <div className="absolute bottom-0 left-0 right-0 p-8">
-                <h3 className="font-heading text-3xl font-bold text-foreground mb-2">{selectedDJ.name}</h3>
+                <DialogTitle className="font-heading text-3xl font-bold text-foreground mb-2">
+                  {selectedDJ.name}
+                </DialogTitle>
                 <p className="text-foreground font-body text-xs tracking-wide uppercase mb-1.5">{aboutLabel}</p>
-                <p className="text-foreground leading-relaxed mb-4 font-body text-sm font-medium">{selectedDJ.bio[lang]}</p>
+                <DialogDescription className="text-foreground leading-relaxed mb-4 font-body text-sm font-medium">
+                  {selectedDJ.bio[lang]}
+                </DialogDescription>
                 <div className="flex items-center gap-4 mb-4">
-                  <a href={selectedDJ.instagram} className="text-foreground/70 hover:text-primary transition-colors" aria-label="Instagram">
-                    <Instagram className="w-5 h-5" />
+                  <a
+                    href={selectedDJ.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-foreground/70 hover:text-primary transition-colors"
+                    aria-label={lang === "he" ? `אינסטגרם של ${selectedDJ.name} — נפתח בכרטיסייה חדשה` : `${selectedDJ.name} on Instagram — opens in new tab`}
+                  >
+                    <Instagram className="w-5 h-5" aria-hidden="true" />
                   </a>
-                  <a href={selectedDJ.tiktok} className="text-foreground/70 hover:text-primary transition-colors" aria-label="TikTok">
-                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                  <a
+                    href={selectedDJ.tiktok}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-foreground/70 hover:text-primary transition-colors"
+                    aria-label={lang === "he" ? `טיקטוק של ${selectedDJ.name} — נפתח בכרטיסייה חדשה` : `${selectedDJ.name} on TikTok — opens in new tab`}
+                  >
+                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" aria-hidden="true">
                       <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.34-6.34V8.89a8.27 8.27 0 004.76 1.52V7a4.84 4.84 0 01-1-.31z" />
                     </svg>
                   </a>
                 </div>
                 {djSignatures[selectedDJ.name] && (
-                  <img src={djSignatures[selectedDJ.name]} alt={`${selectedDJ.name} signature`} className="h-14 w-auto object-contain opacity-80" />
+                  <img
+                    src={djSignatures[selectedDJ.name]}
+                    alt=""
+                    aria-hidden="true"
+                    className="h-14 w-auto object-contain opacity-80"
+                  />
                 )}
               </div>
             </div>
-          </div>
-        </div>
-      )}
+          )}
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

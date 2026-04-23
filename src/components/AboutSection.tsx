@@ -27,14 +27,14 @@ const AboutSection = ({ lang }: AboutSectionProps) => {
         isVisible ? "animate-fade-up" : "opacity-0 translate-y-8"}`
         }>
         
-        <h2 className="font-heading text-4xl md:text-5xl font-bold mb-2 text-primary-foreground">
+        <h2 lang="en" className="font-heading text-4xl md:text-5xl font-bold mb-2 text-primary-foreground">
           About Us
         </h2>
         <div className="w-16 h-1 mx-auto rounded-full mb-8" style={{ background: "hsl(334, 70%, 45%)" }} />
         <p className="md:text-xl leading-relaxed font-body text-primary-foreground font-light text-base">
           {content.body}
         </p>
-        <p className="mt-6 text-lg md:text-xl leading-relaxed font-body text-center text-primary-foreground/80">
+        <p lang="en" className="mt-6 text-lg md:text-xl leading-relaxed font-body text-center text-primary-foreground/90">
           {content.tagline}
         </p>
       </div>
