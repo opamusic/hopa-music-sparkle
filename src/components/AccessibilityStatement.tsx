@@ -22,7 +22,7 @@ const AccessibilityStatement = ({ open, onClose, lang = "he" }: AccessibilitySta
         className="max-w-2xl max-h-[85vh] overflow-y-auto rounded-2xl bg-card"
       >
         <DialogHeader>
-          <DialogTitle className="font-heading text-2xl font-bold text-foreground">
+          <DialogTitle className="font-heading text-2xl font-bold text-foreground text-center">
             {title}
           </DialogTitle>
         </DialogHeader>
