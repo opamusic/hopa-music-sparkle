@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useScrollReveal } from "./useScrollReveal";
 import { Phone, Mail, Instagram } from "lucide-react";
+import { submitLead } from "@/lib/airtable";
 
 interface ContactSectionProps {
   lang: "he" | "en";
@@ -15,14 +16,16 @@ const copy = {
   he: {
     title: "צור קשר",
     subtitle: "השאירו פרטים ונחזור אליכם בהקדם",
-    thankYou: "תודה!",
-    thankYouText: "קיבלנו את הפרטים שלך, ניצור קשר ממש בקרוב.",
+    thankYou: "יאללה, מתחילים לחגוג! 🎉",
+    thankYouText: "קיבלנו את הפרטים שלך, ניצור קשר ממש בקרוב כדי להפוך את היום הגדול שלכם לבלתי נשכח.",
     fullName: "שם מלא",
     phone: "טלפון",
     email: "אימייל",
     djSelect: "מי הדי-ג'יי שמעניין אותך?",
     notes: "ספרו לנו על האירוע שלכם...",
-    submit: "שליחה"
+    submit: "שליחה",
+    sending: "שולח...",
+    errorMessage: "משהו השתבש, נסו שוב או צרו קשר בטלפון."
   },
   en: {
     title: "Contact",
@@ -34,37 +37,42 @@ const copy = {
     email: "Email",
     djSelect: "Which DJ are you interested in?",
     notes: "Tell us about your event...",
-    submit: "Send"
+    submit: "Send",
+    sending: "Sending...",
+    errorMessage: "Something went wrong. Please try again or call us."
   }
 };
 
 const ContactSection = ({ lang }: ContactSectionProps) => {
   const { ref, isVisible } = useScrollReveal();
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const labels = copy[lang];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const form = e.target as HTMLFormElement;
-    const formData = new FormData(form);
-    const name = formData.get("fullName") as string || "";
-    const phone = formData.get("phone") as string || "";
-    const email = formData.get("email") as string || "";
-    const dj = formData.get("dj") as string || "";
-    const notes = formData.get("notes") as string || "";
+    if (submitting) return;
+    setErrorMessage(null);
+    setSubmitting(true);
 
-    const lines = [
-      `🎶 *ליד חדש מהאתר OPA* 🎶`,
-      `👤 שם: ${name}`,
-      `📞 טלפון: ${phone}`,
-      email ? `📧 אימייל: ${email}` : "",
-      dj ? `🎧 דיג׳יי: ${dj}` : "",
-      notes ? `📝 הערות: ${notes}` : "",
-    ].filter(Boolean).join("\n");
-
-    const waUrl = `https://api.whatsapp.com/send?phone=972559899791&text=${encodeURIComponent(lines)}`;
-    window.location.href = waUrl;
-    setSubmitted(true);
+    const formData = new FormData(e.target as HTMLFormElement);
+    try {
+      await submitLead({
+        fullName: (formData.get("fullName") as string) || "",
+        phone: (formData.get("phone") as string) || "",
+        email: (formData.get("email") as string) || undefined,
+        dj: (formData.get("dj") as string) || undefined,
+        notes: (formData.get("notes") as string) || undefined,
+        lang,
+      });
+      setSubmitted(true);
+    } catch (err) {
+      console.error(err);
+      setErrorMessage(labels.errorMessage);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -175,11 +183,16 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
                     className="w-full px-5 py-3.5 rounded-xl bg-muted border border-border text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all resize-none text-right" />
                 </div>
 
+                {errorMessage &&
+                  <div role="alert" className="text-sm text-destructive text-right">{errorMessage}</div>
+                }
+
                 <button
                   type="submit"
-                  className="w-full py-4 rounded-xl font-heading font-semibold text-lg hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-lg" style={{ background: "#c32369", color: "#fff" }}>
+                  disabled={submitting}
+                  className="w-full py-4 rounded-xl font-heading font-semibold text-lg hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-lg disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100" style={{ background: "#c32369", color: "#fff" }}>
 
-                  {labels.submit}
+                  {submitting ? labels.sending : labels.submit}
                 </button>
               </form>
             }
