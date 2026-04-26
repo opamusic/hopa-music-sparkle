@@ -1,8 +1,14 @@
+export type PackageOption = "full" | "second";
+
 export interface LeadPayload {
-  fullName: string;
+  groomName: string;
+  brideName?: string;
+  weddingDate?: string;
+  venue?: string;
   phone: string;
   email?: string;
-  dj?: string;
+  dj?: string[];
+  packages?: PackageOption[];
   notes?: string;
   lang: "he" | "en";
 }

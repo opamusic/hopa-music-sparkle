@@ -1,0 +1,430 @@
+{
+  "fetchedAt": "2026-04-26T13:40:10.553Z",
+  "baseId": "appEZlJMMqIFotqrE",
+  "table": {
+    "id": "tblKyjUANobKqOa9C",
+    "name": "ליד חדש",
+    "primaryFieldId": "fldaksRf3O5PqiJNi",
+    "fields": [
+      {
+        "id": "fldaksRf3O5PqiJNi",
+        "name": "פרטי הזוג והארוע",
+        "type": "formula",
+        "description": "Combines groom and bride names into a single field.",
+        "options": {
+          "isValid": true,
+          "formula": "{fld21b7s9XfBbHdjf} & \", \" & {fldFo1fHXhKcoy2uM} & \", \" & {fld0TFHOH03Z476AH} & \", \" & DATETIME_FORMAT({fldiCa5paGSHaRthn}, 'DD/MM/YYYY')",
+          "referencedFieldIds": [
+            "fld21b7s9XfBbHdjf",
+            "fldFo1fHXhKcoy2uM",
+            "fld0TFHOH03Z476AH",
+            "fldiCa5paGSHaRthn"
+          ],
+          "result": {
+            "type": "singleLineText"
+          }
+        }
+      },
+      {
+        "id": "fldPaU6aKKMAYmgnA",
+        "name": "מספר פלאפון",
+        "type": "phoneNumber"
+      },
+      {
+        "id": "fldhhGHQS7m0dLuUE",
+        "name": "ווצאפ לקוח",
+        "type": "formula",
+        "options": {
+          "isValid": true,
+          "formula": "IF({fldPaU6aKKMAYmgnA}, \n  \"https://wa.me/972\" & RIGHT(SUBSTITUTE(SUBSTITUTE({fldPaU6aKKMAYmgnA}, \"-\", \"\"), \" \", \"\"), 9)\n)",
+          "referencedFieldIds": [
+            "fldPaU6aKKMAYmgnA"
+          ],
+          "result": {
+            "type": "singleLineText"
+          }
+        }
+      },
+      {
+        "id": "fld21b7s9XfBbHdjf",
+        "name": "שם חתן",
+        "type": "singleLineText"
+      },
+      {
+        "id": "fldFo1fHXhKcoy2uM",
+        "name": "שם כלה",
+        "type": "singleLineText"
+      },
+      {
+        "id": "fld0TFHOH03Z476AH",
+        "name": "שם אולם",
+        "type": "singleLineText"
+      },
+      {
+        "id": "fldlTIs8pXdOJOfX5",
+        "name": "אימייל",
+        "type": "email"
+      },
+      {
+        "id": "fldg5fYLPNxk95D6q",
+        "name": "סוג שירות",
+        "type": "multipleSelects",
+        "options": {
+          "choices": [
+            {
+              "id": "selGQPsjPFxiJmJSo",
+              "name": "חתונה מלאה ",
+              "color": "yellowLight2"
+            },
+            {
+              "id": "selQnjE6o7FJMELoP",
+              "name": "סבב שני ",
+              "color": "tealLight2"
+            }
+          ]
+        }
+      },
+      {
+        "id": "fldiCa5paGSHaRthn",
+        "name": "תאריך חתונה",
+        "type": "date",
+        "options": {
+          "dateFormat": {
+            "name": "local",
+            "format": "l"
+          }
+        }
+      },
+      {
+        "id": "fldWo0jmi7GjYRSuf",
+        "name": "די ג׳י מבוקש",
+        "type": "multipleSelects",
+        "options": {
+          "choices": [
+            {
+              "id": "seltVTzmdL6K470mx",
+              "name": "הולנדר",
+              "color": "redLight2"
+            },
+            {
+              "id": "selgTW6lWq2ccvLIQ",
+              "name": "רוזי",
+              "color": "cyanLight2"
+            },
+            {
+              "id": "selNjkVu2TfOVnRPL",
+              "name": "עילאי אטיאס",
+              "color": "blueLight2"
+            }
+          ]
+        }
+      },
+      {
+        "id": "fld7q8GwhKxhvgnH4",
+        "name": "? פנוי בתאריך ",
+        "type": "singleSelect",
+        "options": {
+          "choices": [
+            {
+              "id": "selEP5qTf3vzsHay0",
+              "name": "כן",
+              "color": "blueLight2"
+            },
+            {
+              "id": "selnC15JkhZworH2k",
+              "name": "לא",
+              "color": "redLight2"
+            }
+          ]
+        }
+      },
+      {
+        "id": "fldwUQKLArxS12154",
+        "name": "שליחת הצעת מחיר של",
+        "type": "multipleSelects",
+        "description": "מציג את רשימת הדיג׳יים הפנויים אם לא פנוי בתאריך.",
+        "options": {
+          "choices": [
+            {
+              "id": "selXtWf4kWzBFqLcG",
+              "name": "הולנדר",
+              "color": "redLight2"
+            },
+            {
+              "id": "selWmElZdncXl8U4G",
+              "name": "רוזי",
+              "color": "cyanLight2"
+            },
+            {
+              "id": "selkSJzt1sQ5DZAXQ",
+              "name": "עילאי אטיאס",
+              "color": "blueLight2"
+            }
+          ]
+        }
+      },
+      {
+        "id": "fldxMUKcdNFZ3VLBU",
+        "name": "די ג׳י בפועל בחתונה",
+        "type": "multipleSelects",
+        "description": "מציג את רשימת הדיג׳יים הפנויים אם לא פנוי בתאריך.",
+        "options": {
+          "choices": [
+            {
+              "id": "selXtWf4kWzBFqLcG",
+              "name": "הולנדר",
+              "color": "blueLight2"
+            },
+            {
+              "id": "selWmElZdncXl8U4G",
+              "name": "רוזי",
+              "color": "cyanLight2"
+            },
+            {
+              "id": "selmz2EvB6hKQ43ql",
+              "name": "עילאי אטיאס",
+              "color": "blueLight2"
+            }
+          ]
+        }
+      },
+      {
+        "id": "fldhHEkdVGe5EyxQ4",
+        "name": "? ליד רונה ",
+        "type": "singleSelect",
+        "options": {
+          "choices": [
+            {
+              "id": "selFOQ565ujadjXRQ",
+              "name": "כן",
+              "color": "redLight2"
+            },
+            {
+              "id": "selwfIvIKCzJrdBxh",
+              "name": "לא",
+              "color": "blueLight2"
+            }
+          ]
+        }
+      },
+      {
+        "id": "fldvIcd8eWViRX1Xf",
+        "name": "הצעת מחיר די ג׳י",
+        "type": "singleLineText"
+      },
+      {
+        "id": "fldkCX7PWb3Nw73ZI",
+        "name": "רווח די ג׳י",
+        "type": "singleLineText"
+      },
+      {
+        "id": "fldp3zvULr8Wu7Lex",
+        "name": "? משהו שתרצו להוסיף ",
+        "type": "multilineText"
+      },
+      {
+        "id": "fldbtlTMghvS8ozAq",
+        "name": "סטטוס",
+        "type": "singleSelect",
+        "description": "לשלוח חוזה\n",
+        "options": {
+          "choices": [
+            {
+              "id": "seldiU7WoHNuuaTeg",
+              "name": "פנייה ראשונית",
+              "color": "blueLight2"
+            },
+            {
+              "id": "selklIXDNtv8KHuQc",
+              "name": "נשלח הצעת מחיר",
+              "color": "grayLight2"
+            },
+            {
+              "id": "selFkgTYufOkfn8RM",
+              "name": "נשלח חוזה",
+              "color": "orangeLight2"
+            },
+            {
+              "id": "selwnZ9Ji90vBOcU4",
+              "name": "חוזה נחתם",
+              "color": "yellowLight2"
+            },
+            {
+              "id": "selOVGHguJGmO5zD9",
+              "name": "לא חתמו",
+              "color": "grayDark1"
+            }
+          ]
+        }
+      },
+      {
+        "id": "fldQToS6ifYjHI8ya",
+        "name": "להעביר ללקוח סגור",
+        "type": "checkbox",
+        "options": {
+          "icon": "check",
+          "color": "greenBright"
+        }
+      },
+      {
+        "id": "fld4yIOXuCSkRnZLD",
+        "name": "חוזה אישי לשליחה",
+        "type": "formula",
+        "description": "Generates a Fillout form link with the Airtable record ID as a query parameter.",
+        "options": {
+          "isValid": true,
+          "formula": "\"https://forms.fillout.com/t/9t9RrBhHcDus?id=xxxxx&id=\" & RECORD_ID()",
+          "referencedFieldIds": [],
+          "result": {
+            "type": "singleLineText"
+          }
+        }
+      },
+      {
+        "id": "fldQO8PkkHYr5Cyr5",
+        "name": "כפתור הצעת מחיר",
+        "type": "button",
+        "description": "Generates a Make.com webhook URL with the record ID as a query parameter for sending a price quote."
+      },
+      {
+        "id": "fldfRa8CLXRXKj0kR",
+        "name": "כפתור חוזה אישי",
+        "type": "button",
+        "description": "Generates a Make.com webhook URL with the Airtable record ID as a query parameter."
+      },
+      {
+        "id": "fldOpO5HM8kswKSTK",
+        "name": "קובץ חוזה חתום",
+        "type": "multipleAttachments",
+        "options": {
+          "isReversed": false
+        }
+      },
+      {
+        "id": "fldV9eVLHYRcsAptN",
+        "name": "טבלאות לקוחות סגורים",
+        "type": "multipleRecordLinks",
+        "options": {
+          "linkedTableId": "tblLoyJsPLX7dBHxg",
+          "isReversed": false,
+          "prefersSingleRecordLink": false,
+          "inverseLinkFieldId": "fldZLErGjTuZ2cEQS"
+        }
+      },
+      {
+        "id": "fldUFEVN6XlA6M3R8",
+        "name": "אפיון מוזיקלי - הולנדר",
+        "type": "multipleRecordLinks",
+        "options": {
+          "linkedTableId": "tblHcXgNqySQfhk8p",
+          "isReversed": false,
+          "prefersSingleRecordLink": false,
+          "inverseLinkFieldId": "fld3itx2tgmIek1yT"
+        }
+      },
+      {
+        "id": "fldBagP3x4eZchrTv",
+        "name": "Record ID",
+        "type": "formula",
+        "description": "Displays the unique Airtable record identifier for each row.",
+        "options": {
+          "isValid": true,
+          "formula": "RECORD_ID()",
+          "referencedFieldIds": [],
+          "result": {
+            "type": "singleLineText"
+          }
+        }
+      },
+      {
+        "id": "fldPMjoxYSBfBfNLL",
+        "name": "תאריך ושעת כניסת ליד",
+        "type": "createdTime",
+        "options": {
+          "result": {
+            "type": "dateTime",
+            "options": {
+              "dateFormat": {
+                "name": "local",
+                "format": "l"
+              },
+              "timeFormat": {
+                "name": "12hour",
+                "format": "h:mma"
+              },
+              "timeZone": "client"
+            }
+          }
+        }
+      },
+      {
+        "id": "fldBPs0JqbRheu4YQ",
+        "name": "הודעה אוטומטית שליחה",
+        "type": "checkbox",
+        "options": {
+          "icon": "check",
+          "color": "greenBright"
+        }
+      },
+      {
+        "id": "fldraRxRcwzvM0sqw",
+        "name": "ליד חדש - רונה",
+        "type": "singleLineText"
+      },
+      {
+        "id": "fldX33G9lR826T5pz",
+        "name": "תאריך כניסת ליד",
+        "type": "createdTime",
+        "options": {
+          "result": {
+            "type": "dateTime",
+            "options": {
+              "dateFormat": {
+                "name": "european",
+                "format": "D/M/YYYY"
+              },
+              "timeFormat": {
+                "name": "24hour",
+                "format": "HH:mm"
+              },
+              "timeZone": "utc"
+            }
+          }
+        }
+      },
+      {
+        "id": "flddap07s2ULNxhVo",
+        "name": "Last Modified By",
+        "type": "lastModifiedTime",
+        "options": {
+          "isValid": true,
+          "referencedFieldIds": [],
+          "result": {
+            "type": "dateTime",
+            "options": {
+              "dateFormat": {
+                "name": "local",
+                "format": "l"
+              },
+              "timeFormat": {
+                "name": "12hour",
+                "format": "h:mma"
+              },
+              "timeZone": "client"
+            }
+          }
+        }
+      },
+      {
+        "id": "fldWleneAFyNmXEMM",
+        "name": "ליד חדש - רונה 2",
+        "type": "singleLineText"
+      },
+      {
+        "id": "fldFD7C7aPJdnPvYW",
+        "name": "פרטי אירוע מוזיקלי",
+        "type": "singleLineText"
+      }
+    ]
+  }
+}
