@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useScrollReveal } from "./useScrollReveal";
 import {
   Phone,
@@ -115,6 +115,12 @@ const ContactSection = ({ lang }: ContactSectionProps) => {
   const [emailError, setEmailError] = useState<string | null>(null);
 
   const today = useMemo(() => new Date().toISOString().split("T")[0], []);
+
+  useEffect(() => {
+    if (submitted) {
+      document.getElementById("contact-title")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [submitted]);
 
   const validatePhone = (v: string) =>
     v.trim().length === 0 ? labels.invalidPhone : PHONE_PATTERN.test(v.trim()) ? null : labels.invalidPhone;
