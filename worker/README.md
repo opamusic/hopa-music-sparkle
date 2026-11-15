@@ -1,16 +1,18 @@
 # OPA Airtable Proxy (Cloudflare Worker)
 
-Tiny HTTP proxy that accepts contact-form submissions from the OPA website and writes them to Airtable. The Airtable Personal Access Token lives only as a Cloudflare Worker secret — it never touches the frontend bundle or git.
+Tiny HTTP proxy that accepts contact-form submissions from the OPA websites and writes them to Airtable. The Airtable Personal Access Token lives only as a Cloudflare Worker secret — it never touches the frontend bundle or git.
+
+Two sites post to this Worker: this repo's app (opamusic.co.il) and the OPA Music Group rebrand (`opa-music-copy.ilaiattias.chatgpt.site`, moving to opamusic.co.il). See `docs/opa-music-group-airtable.md`.
 
 ## Architecture
 
 ```
-Browser (opamusic.co.il form)
+Browser (opamusic.co.il / OPA Music Group form)
         │  POST /lead  (JSON)
         ▼
 Cloudflare Worker  ── verifies CORS
                    ── rate-limits by IP (5 req / 60s)
-                   ── validates fullName + phone
+                   ── validates groomName + brideName + phone
                    ── maps form fields → Hebrew Airtable fields
                    ── forwards to Airtable
         │
@@ -30,19 +32,21 @@ The worker runs **on every HTTP request** to its URL — it's serverless, there 
 
 | Method | Path | Purpose |
 |---|---|---|
-| `POST` | `/lead` | Create a new lead in Airtable. Body: `{ fullName, phone, email?, dj?, notes?, lang? }`. Returns `{ ok: true }` on success. |
+| `POST` | `/lead` | Create a new lead in Airtable. Body: `{ groomName, brideName, phone, weddingDate?, venue?, email?, dj?, packages?, notes?, lang? }`. Returns `{ ok: true }` on success, `400` on invalid JSON or missing required fields, `429` when rate-limited, `502` when Airtable rejects the write. |
 | `OPTIONS` | `/lead` | CORS preflight. |
 
 Any other path or method returns 404.
 
 ## One-time setup
 
+Run wrangler through the local binary (`./node_modules/.bin/wrangler`). `npx wrangler` fails in this folder with `Missing script: "wrangler"`.
+
 ```bash
 cd worker
 npm install
-npx wrangler login                       # opens browser, authenticates your Cloudflare account
-npx wrangler secret put AIRTABLE_TOKEN   # paste the Airtable PAT when prompted
-npx wrangler deploy                      # first deploy
+./node_modules/.bin/wrangler login                       # opens browser, authenticates your Cloudflare account
+./node_modules/.bin/wrangler secret put AIRTABLE_TOKEN   # paste the Airtable PAT when prompted
+./node_modules/.bin/wrangler deploy                      # first deploy
 ```
 
 The Airtable PAT needs these scopes on base `appEZlJMMqIFotqrE`:
@@ -57,14 +61,14 @@ Any time `src/index.ts` or `wrangler.toml` changes:
 
 ```bash
 cd worker
-npx wrangler deploy
+./node_modules/.bin/wrangler deploy
 ```
 
 This bundles the worker, uploads it, and atomically swaps it in. Takes ~10 seconds. The URL stays the same.
 
 To roll back:
 ```bash
-npx wrangler rollback                    # revert to the previous version
+./node_modules/.bin/wrangler rollback                    # revert to the previous version
 ```
 
 ## Local development
@@ -73,7 +77,7 @@ Run the worker locally against real Airtable:
 
 ```bash
 cd worker
-npx wrangler dev                         # http://localhost:8787
+./node_modules/.bin/wrangler dev                         # http://localhost:8787
 ```
 
 `wrangler dev` uses the secrets already stored in Cloudflare (remote mode by default) or reads `worker/.dev.vars` (local mode). To test POST:
@@ -88,7 +92,7 @@ curl -sS -X POST http://localhost:8787/lead \
 
 ```bash
 cd worker
-npx wrangler tail                        # streams requests + console.error output
+./node_modules/.bin/wrangler tail                        # streams requests + console.error output
 ```
 
 Useful when debugging a 502 from Airtable — the real Airtable error message is printed via `console.error` in `src/index.ts`.
@@ -122,12 +126,17 @@ Changes to `wrangler.toml` take effect on the next `wrangler deploy`.
 
 | Form payload | Airtable field (`ליד חדש`) | Notes |
 |---|---|---|
-| `fullName` | `שם חתן` | Required. |
+| `groomName` | `שם חתן` | Required. |
+| `brideName` | `שם כלה` | Required. |
 | `phone` | `מספר פלאפון` | Required. |
+| `weddingDate` | `תאריך חתונה` | Optional. `YYYY-MM-DD`. |
+| `venue` | `שם אולם` | Optional. |
 | `email` | `אימייל` | Optional. |
 | `dj` = `"ILAY ATTIAS"` | `די ג׳י מבוקש` = `["עילאי אטיאס"]` | Multi-select. |
 | `dj` = `"ORI HOLLANDER"` | `די ג׳י מבוקש` = `["הולנדר"]` | |
 | `dj` = `"ITAY ROZENGART"` | `די ג׳י מבוקש` = `["רוזי"]` | |
+| `dj` = `"DORON MAYO"` | `די ג׳י מבוקש` = `["דורון מאיו"]` | Sent by the OPA Music Group site only. |
+| `packages` = `["full"]` / `["second"]` | `סוג שירות` = `"חתונה מלאה "` / `"סבב שני "` | Choice names have a trailing space. |
 | `dj` = `"Rona"` / `"רונה | Rona"` | `? ליד רונה ` = `"כן"` (no multi-select) | Flags the lead as Rona's. |
 | `dj` = anything else | (no DJ field written) | Covers "haven't decided". |
 | `notes` | `? משהו שתרצו להוסיף ` | Optional. |

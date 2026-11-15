@@ -8,10 +8,10 @@ preview_urls = false
 AIRTABLE_BASE_ID = "appEZlJMMqIFotqrE"
 AIRTABLE_TABLE_ID = "tblKyjUANobKqOa9C"
 # Comma-separated list. Include your GitHub Pages origin and localhost for dev.
-ALLOWED_ORIGINS = "https://opamusic.co.il,https://opamusic.github.io,http://localhost:8080,http://localhost:5173"
+ALLOWED_ORIGINS = "https://opamusic.co.il,https://opamusic.github.io,https://opa-music-copy.ilaiattias.chatgpt.site,https://rona-exact-copy.ilaiattias.chatgpt.site,https://ronaweddings.co.il,http://localhost:8080,http://localhost:5173"
 
 # AIRTABLE_TOKEN is a secret — set with:
-#   cd worker && npx wrangler secret put AIRTABLE_TOKEN
+#   cd worker && ./node_modules/.bin/wrangler secret put AIRTABLE_TOKEN
 
 # Rate limit: max 5 lead submissions per IP per 60 seconds.
 [[unsafe.bindings]]

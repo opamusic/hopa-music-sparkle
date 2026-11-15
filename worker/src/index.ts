@@ -44,6 +44,7 @@ const DJ_OPTION_BY_FORM_VALUE: Record<string, string> = {
   "ILAY ATTIAS": "עילאי אטיאס",
   "ORI HOLLANDER": "הולנדר",
   "ITAY ROZENGART": "רוזי",
+  "DORON MAYO": "דורון מאיו",
 };
 
 const RONA_FORM_VALUES = new Set(["Rona", "רונה | Rona", "רונה"]);
